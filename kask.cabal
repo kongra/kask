@@ -22,6 +22,7 @@ library
     ghc-options: -fregs-graph
 
   exposed-modules:     Kask.Control.Monad
+                       Kask.Data.List
   -- other-modules:
   other-extensions:    Safe
   build-depends:       base >=4.7 && <4.8
