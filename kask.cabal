@@ -1,0 +1,29 @@
+name:                kask
+version:             0.1.0.0
+synopsis:            A collection of commmon utilities
+description:         Contains common utilities to be shared among
+                     misc. other projects.
+homepage:            https://github.com/kongra/kask
+license:             BSD3
+license-file:        LICENSE
+author:              Konrad Grzanek
+maintainer:          kongra@gmail.com
+copyright:           (c) Konrad Grzanek 2014
+category:            Common utils
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  ghc-options:         -W -Wall -Werror -O2
+  if impl(ghc >= 6.8)
+    ghc-options: -fwarn-tabs
+  if impl(ghc > 6.10)
+    ghc-options: -fregs-graph
+
+  exposed-modules:     Kask.Control.Monad
+  -- other-modules:
+  other-extensions:    Safe
+  build-depends:       base >=4.7 && <4.8
+  -- hs-source-dirs:
+  default-language:    Haskell2010
