@@ -9,7 +9,7 @@
 -- Module      : Kask.Control.Monad
 -- Copyright   : (c) 2014 Konrad Grzanek
 -- License     : BSD-style (see the file LICENSE)
--- Created     : 2014-07-23
+-- Created     : 2014-10-10
 -- Maintainer  : kongra@gmail.com
 -- Stability   : experimental
 -- Portability : portable
