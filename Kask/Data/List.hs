@@ -16,7 +16,10 @@
 --
 -- List utilities and algorithms.
 ------------------------------------------------------------------------
-module Kask.Data.List where
+module Kask.Data.List
+    (
+      insertBefore
+    ) where
 
 -- | Inserts y before first occurence of x within the list. When y
 -- does not occur in the list, returns the original list. Thanks to:

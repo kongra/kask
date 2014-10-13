@@ -16,7 +16,13 @@
 --
 -- Some utilites related to Control.Monad
 ------------------------------------------------------------------------
-module Kask.Control.Monad where
+module Kask.Control.Monad
+    (
+      whenM
+    , unlessM
+    , mapMM_
+    , forMM_
+    ) where
 
 import Control.Monad (when, unless)
 
