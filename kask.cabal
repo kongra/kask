@@ -18,8 +18,6 @@ library
   ghc-options:         -O2 -W -Wall -Werror -funbox-strict-fields
   if impl(ghc >= 6.8)
     ghc-options: -fwarn-tabs
-  if impl(ghc > 6.10)
-    ghc-options: -fregs-graph
 
   exposed-modules:     Kask.Control.Monad
                        Kask.Data.List
