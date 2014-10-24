@@ -21,6 +21,7 @@ library
 
   exposed-modules:     Kask.Control.Monad
                        Kask.Data.List
+                       Kask.Data.Function
   -- other-modules:
   other-extensions:    Safe
   build-depends:       base >=4.7 && <4.8
