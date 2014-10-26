@@ -19,6 +19,7 @@
 module Kask.Data.List
     (
       insertBefore
+    , markLast
     ) where
 
 -- | Inserts y before first occurence of x within the list. When y
@@ -35,3 +36,12 @@ insertBefore y x (a:as)
   | a == x    = y:a:as
   | otherwise = a : insertBefore y x as
 {-# INLINABLE insertBefore #-}
+
+-- | Takes a list [e0, e1, ..., en] and returns [False, False, ..., True] or
+-- [False, False, ...] if the argument is infinite.
+markLast :: [a] -> [Bool]
+markLast []  = []
+markLast (_:xs)
+  | null xs   = [True]
+  | otherwise = False : markLast xs
+{-# NOINLINE markLast #-}
