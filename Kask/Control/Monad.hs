@@ -22,9 +22,12 @@ module Kask.Control.Monad
     , unlessM
     , mapMM_
     , forMM_
-    ) where
+    , toListM
+    )
+    where
 
-import Control.Monad (when, unless)
+import Control.Monad (when, unless, liftM)
+import Data.Foldable (Foldable, toList)
 
 -- | A version of when that works on m Bool rather than raw Bool.
 whenM :: Monad m => m Bool -> m () -> m ()
@@ -45,3 +48,8 @@ mapMM_ f as = as >>= mapM_ f
 forMM_ :: Monad m => m [a] -> (a -> m b) -> m ()
 forMM_ = flip mapMM_
 {-# INLINE forMM_ #-}
+
+-- | A monadic version of Data.Foldable.toList.
+toListM :: (Monad m, Foldable f) => m (f a) -> m [a]
+toListM = liftM toList
+{-# INLINE toListM #-}
