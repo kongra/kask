@@ -15,7 +15,12 @@
 --
 -- Some extensions related to Data.Sequence.
 ------------------------------------------------------------------------
-module Kask.Data.Sequence where
+module Kask.Data.Sequence
+    (
+      insertBeforeFirstOccurence
+    , removeFirstOccurence
+    )
+    where
 
 import qualified Data.Sequence as Seq
 
