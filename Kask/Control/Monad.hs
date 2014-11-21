@@ -20,6 +20,7 @@ module Kask.Control.Monad
     (
       whenM
     , unlessM
+    , mapMM
     , mapMM_
     , forMM_
     , toListM
@@ -38,6 +39,10 @@ whenM p s = p >>= flip when s
 unlessM :: Monad m => m Bool -> m () -> m ()
 unlessM p s = p >>= flip unless s
 {-# INLINE unlessM #-}
+
+-- | A version of mapM that works on m [a] rather than raw [a].
+mapMM :: Monad m => (a -> m b) -> m [a] -> m [b]
+mapMM f as = as >>= mapM f
 
 -- | A version of mapM_ that works on m [a] rather than raw [a].
 mapMM_ :: Monad m => (a -> m b) -> m [a] -> m ()
