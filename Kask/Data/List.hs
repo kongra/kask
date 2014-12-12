@@ -44,4 +44,3 @@ markLast []  = []
 markLast (_:xs)
   | null xs   = [True]
   | otherwise = False : markLast xs
-{-# NOINLINE markLast #-}
