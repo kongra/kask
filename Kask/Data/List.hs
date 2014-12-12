@@ -35,7 +35,6 @@ insertBefore _ _ [] = []
 insertBefore y x (a:as)
   | a == x    = y:a:as
   | otherwise = a : insertBefore y x as
-{-# INLINABLE insertBefore #-}
 
 -- | Takes a list [e0, e1, ..., en] and returns [False, False, ..., True] or
 -- [False, False, ...] if the argument is infinite.

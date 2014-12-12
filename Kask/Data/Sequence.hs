@@ -34,7 +34,7 @@ insertBeforeFirstOccurence :: Eq a =>
 insertBeforeFirstOccurence y x s = (prefix Seq.|> y) Seq.>< suffix
   where
     (prefix, suffix) = Seq.breakl (== x) s
-{-# INLINABLE insertBeforeFirstOccurence #-}
+{-# INLINE insertBeforeFirstOccurence #-}
 
 -- | Removes the first occurence of the element from the
 -- sequence. /O(i)/ where /i/ is the position of the element in the
@@ -50,4 +50,4 @@ removeFirstOccurence x s
   where
     (prefix, suffix) = Seq.breakl (== x) s
     ts               = Seq.tails suffix
-{-# INLINABLE removeFirstOccurence #-}
+{-# INLINE removeFirstOccurence #-}
