@@ -1,9 +1,7 @@
-{-# LANGUAGE CPP #-}
-{-# LANGUAGE DeriveDataTypeable #-}
-#if defined(__GLASGOW_HASKELL__) && __GLASGOW_HASKELL__ >= 702
-{-# LANGUAGE Trustworthy #-}
-#endif
-{-# OPTIONS_GHC -W -Wall #-}
+{-# LANGUAGE    CPP                #-}
+{-# LANGUAGE    DeriveDataTypeable #-}
+{-# LANGUAGE    Trustworthy        #-}
+{-# OPTIONS_GHC -W -Wall           #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.List
@@ -20,6 +18,7 @@ module Kask.Data.List
     (
       insertBefore
     , markLast
+    , nthDef
     ) where
 
 -- | Inserts y before first occurence of x within the list. When y
@@ -43,3 +42,15 @@ markLast []  = []
 markLast (_:xs)
   | null xs   = [True]
   | otherwise = False : markLast xs
+
+-- | Works like !! but returns a default value if the index is
+-- invalid. Stolen from: https://wiki.haskell.org/Avoiding_partial_functions.
+-- There is atDef procedure in safe package, but this one does not use
+-- any Eithers and Maybes, so is more effective.
+nthDef :: a -> Int -> [a] -> a
+nthDef d n xs
+  | n < 0     = d
+  | otherwise = case drop n xs of
+    x:_ -> x
+    []  -> d
+{-# INLINE nthDef #-}
