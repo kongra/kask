@@ -1,5 +1,3 @@
-{-# LANGUAGE    CPP                #-}
-{-# LANGUAGE    DeriveDataTypeable #-}
 {-# LANGUAGE    Trustworthy        #-}
 {-# OPTIONS_GHC -W -Wall           #-}
 ------------------------------------------------------------------------
