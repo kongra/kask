@@ -20,6 +20,7 @@ library
     ghc-options: -fwarn-tabs
 
   exposed-modules:   Kask.Control.Monad
+                     Kask.Control.Lens
                      Kask.Data.Function
                      Kask.Data.List
                      Kask.Data.Sequence
