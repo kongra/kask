@@ -17,7 +17,9 @@ module Kask.Data.List
       insertBefore
     , markLast
     , nthDef
-    ) where
+    , takeWhileI
+    )
+    where
 
 -- | Inserts y before first occurence of x within the list. When y
 -- does not occur in the list, returns the original list. Thanks to:
@@ -52,3 +54,9 @@ nthDef d n xs
     x:_ -> x
     []  -> d
 {-# INLINE nthDef #-}
+
+-- | Works like takeWhile, but includes the sentinel for which the
+-- predicate is False.
+takeWhileI :: (a -> Bool) -> [a] -> [a]
+takeWhileI _ []     = []
+takeWhileI p (x:xs) = x : if p x then takeWhileI p xs else []
