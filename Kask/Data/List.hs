@@ -18,6 +18,7 @@ module Kask.Data.List
     , markLast
     , nthDef
     , takeWhileI
+    , powerset
     )
     where
 
@@ -53,10 +54,15 @@ nthDef d n xs
   | otherwise = case drop n xs of
     x:_ -> x
     []  -> d
-{-# INLINE nthDef #-}
+{-# INLINABLE nthDef #-}
 
 -- | Works like takeWhile, but includes the sentinel for which the
 -- predicate is False.
 takeWhileI :: (a -> Bool) -> [a] -> [a]
 takeWhileI _ []     = []
 takeWhileI p (x:xs) = x : if p x then takeWhileI p xs else []
+
+-- | Returns a powerset of the argument.
+powerset :: [a] -> [[a]]
+powerset = foldr (\x ps -> ps ++ [x:p | p <- ps]) [[]]
+{-# INLINABLE powerset #-}
