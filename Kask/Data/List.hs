@@ -14,11 +14,16 @@
 ------------------------------------------------------------------------
 module Kask.Data.List
     (
+      -- * Misc. algorithms
       insertBefore
     , markLast
     , nthDef
     , takeWhileI
+
+      -- * Combinatorics for lists
     , powerset
+    , kSublists
+    , kSublistsR
     )
     where
 
@@ -66,3 +71,16 @@ takeWhileI p (x:xs) = x : if p x then takeWhileI p xs else []
 powerset :: [a] -> [[a]]
 powerset = foldr (\x ps -> ps ++ [x:p | p <- ps]) [[]]
 {-# INLINABLE powerset #-}
+
+-- | All possible ways to choose @k@ elements from a list, without
+-- repetitions.
+kSublists :: Int -> [a] -> [[a]]
+kSublists 0 _      = [[]]
+kSublists _ []     = []
+kSublists k (x:xs) = map (x:) (kSublists (k-1) xs) ++ kSublists k xs
+
+-- | All possible ways to choose @k@ elements from a list, /with repetitions/.
+kSublistsR :: Int -> [a] -> [[a]]
+kSublistsR 0 _          = [[]]
+kSublistsR _ []         = []
+kSublistsR k xxs@(x:xs) = map (x:) (kSublistsR (k-1) xxs) ++ kSublistsR k xs
