@@ -1,5 +1,4 @@
-{-# LANGUAGE    Trustworthy #-}
-{-# OPTIONS_GHC -W -Wall    #-}
+{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Sequence
@@ -31,7 +30,7 @@ insertBeforeFirstOccurence :: Eq a =>
 insertBeforeFirstOccurence y x s = (prefix Seq.|> y) Seq.>< suffix
   where
     (prefix, suffix) = Seq.breakl (== x) s
-{-# INLINE insertBeforeFirstOccurence #-}
+{-# INLINABLE insertBeforeFirstOccurence #-}
 
 -- | Removes the first occurence of the element from the
 -- sequence. /O(i)/ where /i/ is the position of the element in the
@@ -47,4 +46,4 @@ removeFirstOccurence x s
   where
     (prefix, suffix) = Seq.breakl (== x) s
     ts               = Seq.tails suffix
-{-# INLINE removeFirstOccurence #-}
+{-# INLINABLE removeFirstOccurence #-}

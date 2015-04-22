@@ -1,5 +1,5 @@
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE RankNTypes  #-}
+{-# LANGUAGE Safe       #-}
+{-# LANGUAGE RankNTypes #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Control.Lens
@@ -26,7 +26,7 @@ module Kask.Control.Lens
 import Control.Applicative
 import Data.Functor.Identity
 
-type Lens s a = Functor f => (a -> f a) -> s -> f s
+type Lens s a = forall f. Functor f => (a -> f a) -> s -> f s
 
 over :: Lens s a -> (a -> a) -> s -> s
 over ln f = runIdentity . ln (Identity . f)

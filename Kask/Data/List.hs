@@ -1,5 +1,4 @@
-{-# LANGUAGE    Trustworthy        #-}
-{-# OPTIONS_GHC -W -Wall           #-}
+{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.List

@@ -1,5 +1,4 @@
-{-# LANGUAGE    Trustworthy #-}
-{-# OPTIONS_GHC -W -Wall    #-}
+{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Control.Monad
@@ -24,7 +23,7 @@ module Kask.Control.Monad
     where
 
 import Control.Monad (when, unless, liftM)
-import Data.Foldable (Foldable, toList)
+import Data.Foldable (toList)
 
 -- | A version of when that works on m Bool rather than raw Bool.
 whenM :: Monad m => m Bool -> m () -> m ()
