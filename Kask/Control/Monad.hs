@@ -38,6 +38,7 @@ unlessM p s = p >>= flip unless s
 -- | A version of mapM that works on m [a] rather than raw [a].
 mapMM :: Monad m => (a -> m b) -> m [a] -> m [b]
 mapMM f as = as >>= mapM f
+{-# INLINE mapMM #-}
 
 -- | A version of mapM_ that works on m [a] rather than raw [a].
 mapMM_ :: Monad m => (a -> m b) -> m [a] -> m ()
