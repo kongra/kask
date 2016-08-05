@@ -32,8 +32,8 @@ treeSearch :: TreeSearchCombiner a
 treeSearch _    []     _    _    = Nothing
 treeSearch comb (s:ss) goal adjs =
   if goal s
-    then Just s
-    else treeSearch comb states goal adjs
+  then Just s
+  else treeSearch comb states goal adjs
   where states = comb ss (adjs s)
 
 -- | The combiner for the breadth-first search.

@@ -52,5 +52,5 @@ forMM_ = flip mapMM_
 
 -- | A monadic version of Data.Foldable.toList.
 toListM :: (Monad m, Foldable f) => m (f a) -> m [a]
-toListM = liftM toList
+toListM = fmap toList
 {-# INLINE toListM #-}
