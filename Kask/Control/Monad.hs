@@ -22,7 +22,7 @@ module Kask.Control.Monad
     )
     where
 
-import Control.Monad (when, unless, liftM)
+import Control.Monad (when, unless)
 import Data.Foldable (toList)
 
 -- | A version of when that works on m Bool rather than raw Bool.
