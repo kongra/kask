@@ -23,8 +23,8 @@ module Kask.Control.Lens
     )
     where
 
-import Control.Applicative (Const (Const), getConst)
-import Data.Functor.Identity (Identity (Identity), runIdentity)
+import Control.Applicative
+import Data.Functor.Identity
 
 type Lens s a = forall f. Functor f => (a -> f a) -> s -> f s
 
