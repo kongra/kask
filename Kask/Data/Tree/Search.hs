@@ -1,7 +1,7 @@
 {-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
--- Module      : Kask.Search.Tree
+-- Module      : Kask.Data.Tree.Search
 -- Copyright   : (c) 2014 Konrad Grzanek
 -- License     : BSD-style (see the file LICENSE)
 -- Created     : 2014-10-25
@@ -11,7 +11,7 @@
 --
 -- (Rose) tree search and traversal algorithms
 ------------------------------------------------------------------------
-module Kask.Search.Tree
+module Kask.Data.Tree.Search
     (
       -- * Search abstraction
       Adjs

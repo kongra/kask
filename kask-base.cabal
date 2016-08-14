@@ -29,10 +29,13 @@ library
                      Kask.Data.Function
                      Kask.Data.List
                      Kask.Data.Sequence
+                     Kask.Data.Tree.Print
+                     Kask.Data.Tree.Search
   -- other-modules:
   other-extensions:  Safe
-  build-depends:     base         >= 4.8
+  build-depends:     base         >= 4.9
                    , containers   >= 0.5.7.1
                    , transformers >= 0.5.2.0
+                   , mtl          >= 2.2.1
   -- hs-source-dirs:
   default-language:  Haskell2010
