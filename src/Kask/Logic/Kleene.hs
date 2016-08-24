@@ -17,6 +17,7 @@ module Kask.Logic.Kleene
     , not
     , and
     , or
+    , impl
     )
     where
 
@@ -43,3 +44,8 @@ or False      b = b
 or Unknown True = True
 or Unknown    _ = Unknown
 {-# INLINE or #-}
+
+-- | Logical implication a -> b = not(a) or b
+impl :: Value -> Value -> Value
+impl a b = not a `or` b
+{-# INLINE impl #-}
