@@ -1,4 +1,6 @@
 module Main (main) where
 
+import qualified Kask.Logic.Kleene as Kleene
+
 main :: IO ()
-main = print "Ala ma psa"
+main = print (Kleene.not Kleene.True)
