@@ -13,17 +13,20 @@
 ------------------------------------------------------------------------
 module Kask.Time
     ( withMsecs
+    , withMsecs'
     , withMsecsIO
+    , withMsecsIO'
+    , logging
     )
     where
 
 import Control.Exception (evaluate)
-import System.Clock (Clock, getTime, diffTimeSpec, toNanoSecs)
+import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs)
 
 -- | Executes the action and returns its result together with the
 -- execution time in msecs. Uses the specified Clock.
-withMsecsIO :: Clock -> IO a -> IO (a, Double)
-withMsecsIO c action = do
+withMsecsIO' :: Clock -> IO a -> IO (a, Double)
+withMsecsIO' c action = do
   start <- getTime  c
   value <- action
   end   <- getTime  c
@@ -32,7 +35,19 @@ withMsecsIO c action = do
   let msecs = fromInteger nanos / 1e6
   return (value, msecs)
 
+withMsecsIO :: IO a -> IO (a, Double)
+withMsecsIO = withMsecsIO' Monotonic
+
 -- | Evaluates its second arg to WHNF returning the result together
 -- with the evaluation time in msecs. Uses the specified Clock.
-withMsecs :: Clock -> a -> IO (a, Double)
-withMsecs c = withMsecsIO c . evaluate
+withMsecs' :: Clock -> a -> IO (a, Double)
+withMsecs' c = withMsecsIO' c . evaluate
+
+withMsecs :: a -> IO (a, Double)
+withMsecs = withMsecs' Monotonic
+
+logging :: String -> IO (a, Double) -> IO a
+logging s action = do
+  (value, msecs) <- action
+  putStrLn $ s ++ show msecs ++ " msecs"
+  return value
