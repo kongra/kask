@@ -32,7 +32,8 @@ withMsecsIO' c action = do
   end   <- getTime  c
 
   let nanos = toNanoSecs $ diffTimeSpec end start
-  let msecs = fromInteger nanos / 1e6
+      msecs = fromInteger nanos / 1e6
+
   return (value, msecs)
 
 withMsecsIO :: IO a -> IO (a, Double)
