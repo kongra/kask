@@ -1,4 +1,5 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE            Safe #-}
+{-# LANGUAGE PatternSynonyms #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Text
@@ -13,6 +14,7 @@
 ------------------------------------------------------------------------
 module Kask.Text
        ( Trimmed
+       , pattern Trimmed
        , trimmed
        )
        where
@@ -21,10 +23,12 @@ import Prelude hiding (null)
 import Data.Text (Text, strip, null)
 
 -- | Trimmed, non-blank Text
-newtype Trimmed = Trimmed Text deriving (Show, Eq);
+newtype Trimmed = MakeTrimmed Text deriving (Show, Eq);
+
+pattern Trimmed tr <- MakeTrimmed tr
 
 trimmed :: Text -> Maybe Trimmed
 trimmed s
   | null tr   = Nothing
-  | otherwise = Just (Trimmed tr)
+  | otherwise = Just (MakeTrimmed tr)
   where tr = strip s

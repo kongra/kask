@@ -1,5 +1,6 @@
 {-# LANGUAGE              Safe #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE   PatternSynonyms #-}
 module Main where
 
 import Kask.Time
@@ -13,7 +14,14 @@ test1 = do
   print value
 
 test2 :: IO ()
-test2 = putStrLn $ show $ Text.trimmed "aaa" == Text.trimmed "   aaa  "
+test2 = do
+  let s = case Text.trimmed "aaa" of
+        Just (Text.Trimmed tr) -> tr
+        Nothing                -> "-"
+        Just _                 -> error "IMPOSSIBLE"
+  print s
 
 main :: IO ()
-main = test2
+main = do
+  test1
+  test2
