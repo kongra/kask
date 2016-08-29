@@ -1,5 +1,4 @@
-{-# LANGUAGE            Safe #-}
-{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Text
@@ -13,8 +12,7 @@
 -- Misc. functionalities related to Text; constructors, validators, etc.
 ------------------------------------------------------------------------
 module Kask.Text
-       ( Trimmed
-       , pattern Trimmed
+       ( Trimmed (trimmedText)
        , trimmed
        )
        where
@@ -23,12 +21,10 @@ import Prelude hiding (null)
 import Data.Text (Text, strip, null)
 
 -- | Trimmed, non-blank Text
-newtype Trimmed = MakeTrimmed Text deriving (Show, Eq);
-
-pattern Trimmed tr <- MakeTrimmed tr
+newtype Trimmed = Trimmed { trimmedText :: Text } deriving (Show, Eq);
 
 trimmed :: Text -> Maybe Trimmed
 trimmed s
   | null tr   = Nothing
-  | otherwise = Just (MakeTrimmed tr)
+  | otherwise = Just (Trimmed tr)
   where tr = strip s
