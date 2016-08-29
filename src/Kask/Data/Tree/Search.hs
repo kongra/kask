@@ -60,9 +60,7 @@ treeSearch strategy adjs goal (x:xs)
 -- | Breadth-first search strategy.
 breadthFirst :: Strategy a
 breadthFirst = (++)
-{-# INLINE breadthFirst #-}
 
 -- | Depth-first search strategy.
 depthFirst :: Strategy a
 depthFirst  = flip (++)
-{-# INLINE depthFirst #-}

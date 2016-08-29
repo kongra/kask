@@ -100,7 +100,6 @@ printTree
     -- When no max depth specified, we use maxBound :: Int
     mdepth  = fromMaybe maxBound maxDepth'
     mdepth' = if mdepth < 1 then 1 else mdepth
-{-# INLINE printTree #-}
 
 printImpl :: (ShowM m o s) =>
              Printer m a
@@ -136,7 +135,6 @@ genIndent (isLast:lastChildInfos) = compose [prefix, suffix]
     prefix             = rcompose (map indentSymbol (init lastChildInfos))
     indentSymbol True  = emptyIndent
     indentSymbol False = indent
-{-# INLINE genIndent #-}
 
 -- ASCII SYMBOLS
 
