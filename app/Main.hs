@@ -15,10 +15,10 @@ test1 = do
 
 test2 :: IO ()
 test2 = do
-  let s = case Text.trimmed "aaa" of
+  let s = case Text.trimmed "   " of
         Just (Text.Trimmed tr) -> tr
         Nothing                -> "-"
-        Just _                 -> error "IMPOSSIBLE"
+        Just _                 -> error "IMPOSSIBLE: Main/test2/Just _"
   print s
 
 main :: IO ()
