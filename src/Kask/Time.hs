@@ -28,13 +28,16 @@ import Control.Exception (evaluate)
 import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs
                     , TimeSpec)
 
+defaultClock :: Clock
+defaultClock = Monotonic
+
 data Stopwatch = Stopwatch Clock TimeSpec
 
 stopwatch' :: Clock -> IO Stopwatch
 stopwatch' c = fmap (Stopwatch c) (getTime c)
 
 stopwatch :: IO Stopwatch
-stopwatch = stopwatch' Monotonic
+stopwatch = stopwatch' defaultClock
 
 elapsedMsecs :: Stopwatch -> IO Double
 elapsedMsecs (Stopwatch c start) = do
@@ -50,13 +53,13 @@ withMsecsIO' c action = do
   return (value, msecs)
 
 withMsecsIO :: IO a -> IO (a, Double)
-withMsecsIO = withMsecsIO' Monotonic
+withMsecsIO = withMsecsIO' defaultClock
 
 withMsecs' :: Clock -> a -> IO (a, Double)
 withMsecs' c = withMsecsIO' c . evaluate
 
 withMsecs :: a -> IO (a, Double)
-withMsecs = withMsecs' Monotonic
+withMsecs = withMsecs' defaultClock
 
 logging :: String -> IO (a, Double) -> IO a
 logging s action = do
