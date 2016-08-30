@@ -16,7 +16,7 @@ test1 = do
 test2 :: IO ()
 test2 = do
   let s = case Text.trimmed "   " of
-        Just tr -> Text.trimmedText tr
+        Just tr -> Text.show tr
         Nothing -> "-"
   print s
 

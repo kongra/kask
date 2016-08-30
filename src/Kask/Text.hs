@@ -12,16 +12,25 @@
 -- Misc. functionalities related to Text; constructors, validators, etc.
 ------------------------------------------------------------------------
 module Kask.Text
-       ( Trimmed (trimmedText)
+       ( Trimmed
        , trimmed
+       , ShowText
+       , show
        )
        where
 
-import Prelude hiding (null)
+import Prelude hiding (null, show)
 import Data.Text (Text, strip, null)
 
+class ShowText a where
+  show :: a -> Text
+
 -- | Trimmed, non-blank Text
-newtype Trimmed = Trimmed { trimmedText :: Text } deriving (Show, Eq);
+newtype Trimmed = Trimmed Text deriving (Show, Eq);
+
+instance ShowText Trimmed where
+  show (Trimmed txt) = txt
+  {-# INLINE show #-}
 
 trimmed :: Text -> Maybe Trimmed
 trimmed s
