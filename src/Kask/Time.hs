@@ -16,31 +16,42 @@ module Kask.Time
     , withMsecs'
     , withMsecsIO
     , withMsecsIO'
+    , Stopwatch
+    , stopwatch
+    , stopwatch'
+    , elapsedMsecs
     , logging
     )
     where
 
 import Control.Exception (evaluate)
-import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs)
+import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs
+                    , TimeSpec)
 
--- | Executes the action and returns its result together with the
--- execution time in msecs. Uses the specified Clock.
+data Stopwatch = Stopwatch Clock TimeSpec
+
+stopwatch' :: Clock -> IO Stopwatch
+stopwatch' c = fmap (Stopwatch c) (getTime c)
+
+stopwatch :: IO Stopwatch
+stopwatch = stopwatch' Monotonic
+
+elapsedMsecs :: Stopwatch -> IO Double
+elapsedMsecs (Stopwatch c start) = do
+  end <- getTime c
+  let nanos = toNanoSecs $ diffTimeSpec end start
+  return (fromInteger nanos / 1e6)
+
 withMsecsIO' :: Clock -> IO a -> IO (a, Double)
 withMsecsIO' c action = do
-  start <- getTime  c
-  value <- action
-  end   <- getTime  c
-
-  let nanos = toNanoSecs $ diffTimeSpec end start
-      msecs = fromInteger nanos / 1e6
-
+  swatch <- stopwatch' c
+  value  <- action
+  msecs  <- elapsedMsecs swatch
   return (value, msecs)
 
 withMsecsIO :: IO a -> IO (a, Double)
 withMsecsIO = withMsecsIO' Monotonic
 
--- | Evaluates its second arg to WHNF returning the result together
--- with the evaluation time in msecs. Uses the specified Clock.
 withMsecs' :: Clock -> a -> IO (a, Double)
 withMsecs' c = withMsecsIO' c . evaluate
 

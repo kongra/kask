@@ -8,7 +8,7 @@ import qualified Kask.Text as Text
 
 test1 :: IO ()
 test1 = do
-  let coll = [1 .. 10000000] :: [Int]
+  let coll = [1 .. 10000000] :: [Integer]
   let s    = sum coll
   value <- logging "Computations took sthing like " (withMsecs s)
   print value
