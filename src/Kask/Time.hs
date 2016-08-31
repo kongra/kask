@@ -20,7 +20,10 @@ module Kask.Time
     , stopwatch
     , stopwatch'
     , elapsedMsecs
+    , printMsecs
+    , printMsecs'
     , logging
+    , logging'
     )
     where
 
@@ -61,8 +64,19 @@ withMsecs' c = withMsecsIO' c . evaluate
 withMsecs :: a -> IO (a, Double)
 withMsecs = withMsecs' defaultClock
 
-logging :: String -> IO (a, Double) -> IO a
-logging s action = do
+printMsecs' :: (String -> IO ()) -> String -> IO Double -> String -> IO ()
+printMsecs' printer prefix msecs postfix = do
+  s <- msecs
+  printer (prefix ++ show s ++ postfix)
+
+printMsecs :: String -> IO Double -> String -> IO ()
+printMsecs = printMsecs' putStrLn
+
+logging' :: (String -> IO ()) -> String -> IO (a, Double) -> String -> IO a
+logging' printer prefix action postfix = do
   (value, msecs) <- action
-  putStrLn $ s ++ show msecs ++ " msecs"
+  printer $ prefix ++ show msecs ++ postfix
   return value
+
+logging :: String -> IO (a, Double) -> String -> IO a
+logging = logging' putStrLn
