@@ -16,6 +16,8 @@ module Kask.Text
        , trimmed
        , ShowText
        , show
+       , ShowTrimmed
+       , showTrimmed
        )
        where
 
@@ -31,6 +33,13 @@ newtype Trimmed = Trimmed Text deriving (Show, Eq);
 instance ShowText Trimmed where
   show (Trimmed txt) = txt
   {-# INLINE show #-}
+
+class ShowTrimmed a where
+  showTrimmed :: a -> Trimmed
+
+instance ShowTrimmed Trimmed where
+  showTrimmed = id
+  {-# INLINE showTrimmed #-}
 
 trimmed :: Text -> Maybe Trimmed
 trimmed s
