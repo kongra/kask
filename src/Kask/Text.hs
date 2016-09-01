@@ -21,14 +21,19 @@ module Kask.Text
        )
        where
 
-import Prelude hiding (null)
+import Data.Hashable (Hashable, hashWithSalt)
 import Data.Text (Text, strip, null)
+import Prelude hiding (null)
 
 class ShowText a where
   showText :: a -> Text
 
 -- | Trimmed, non-blank Text
 newtype Trimmed = Trimmed Text deriving Eq
+
+instance Hashable Trimmed where
+  hashWithSalt salt (Trimmed txt) = salt `hashWithSalt` txt
+  {-# INLINE hashWithSalt #-}
 
 instance Show Trimmed where
   show (Trimmed txt) = show txt
