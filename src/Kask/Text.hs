@@ -21,18 +21,22 @@ module Kask.Text
        )
        where
 
-import Prelude hiding (null, show)
+import Prelude hiding (null)
 import Data.Text (Text, strip, null)
 
 class ShowText a where
-  show :: a -> Text
+  showText :: a -> Text
 
 -- | Trimmed, non-blank Text
-newtype Trimmed = Trimmed Text deriving (Show, Eq);
+newtype Trimmed = Trimmed Text deriving Eq
+
+instance Show Trimmed where
+  show (Trimmed txt) = show txt
+  {-# INLINE show #-}
 
 instance ShowText Trimmed where
-  show (Trimmed txt) = txt
-  {-# INLINE show #-}
+  showText (Trimmed txt) = txt
+  {-# INLINE showText #-}
 
 class ShowTrimmed a where
   showTrimmed :: a -> Trimmed
