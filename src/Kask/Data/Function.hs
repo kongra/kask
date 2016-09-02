@@ -1,7 +1,7 @@
 {-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
--- Module      : Kask.Data.List
+-- Module      : Kask.Data.Function
 -- Copyright   : (c) 2014 Konrad Grzanek
 -- License     : BSD-style (see the file LICENSE)
 -- Created     : 2014-10-24
