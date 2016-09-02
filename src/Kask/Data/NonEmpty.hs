@@ -15,10 +15,10 @@ module Kask.Data.NonEmpty
        ( List
        , fromList
        , toList
-       , Map
+       , HashMap
        , fromHashMap
        , toHashMap
-       , Set
+       , HashSet
        , fromHashSet
        , toHashSet
        )
@@ -46,36 +46,36 @@ instance Show a => Show (List a) where
 
 -- NON-EMPTY SET
 
-newtype Set a = Set (Set.HashSet a) deriving (Eq)
+newtype HashSet a = HashSet (Set.HashSet a) deriving (Eq)
 
-fromHashSet :: Set.HashSet a-> Maybe (Set a)
+fromHashSet :: Set.HashSet a-> Maybe (HashSet a)
 fromHashSet s
   | Set.null s = Nothing
-  | otherwise  = Just (Set s)
+  | otherwise  = Just (HashSet s)
 {-# INLINE fromHashSet #-}
 
-toHashSet :: Set a -> Set.HashSet a
-toHashSet (Set m) = m
+toHashSet :: HashSet a -> Set.HashSet a
+toHashSet (HashSet m) = m
 {-# INLINE toHashSet #-}
 
-instance Show a => Show (Set a) where
-  show (Set s) = show s
+instance Show a => Show (HashSet a) where
+  show (HashSet s) = show s
   {-# INLINE show #-}
 
 -- NON-EMPTY MAP
 
-newtype Map k v = Map (Map.HashMap k v) deriving (Eq)
+newtype HashMap k v = HashMap (Map.HashMap k v) deriving (Eq)
 
-fromHashMap :: Map.HashMap k v -> Maybe (Map k v)
+fromHashMap :: Map.HashMap k v -> Maybe (HashMap k v)
 fromHashMap m
   | Map.null m = Nothing
-  | otherwise  = Just (Map m)
+  | otherwise  = Just (HashMap m)
 {-# INLINE fromHashMap #-}
 
-toHashMap :: Map k v -> Map.HashMap k v
-toHashMap (Map m) = m
+toHashMap :: HashMap k v -> Map.HashMap k v
+toHashMap (HashMap m) = m
 {-# INLINE toHashMap #-}
 
-instance (Show k, Show v) => Show (Map k v) where
-  show (Map m) = show m
+instance (Show k, Show v) => Show (HashMap k v) where
+  show (HashMap m) = show m
   {-# INLINE show #-}
