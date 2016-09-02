@@ -19,6 +19,7 @@ library
                        Kask.Control.Lens
                        Kask.Data.Function
                        Kask.Data.List
+                       Kask.Data.NonEmpty
                        Kask.Data.Sequence
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search
@@ -33,6 +34,7 @@ library
                      , clock
                      , text
                      , hashable
+                     , unordered-containers
 
   default-language:    Haskell2010
 
