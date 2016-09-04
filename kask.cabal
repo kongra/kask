@@ -15,7 +15,8 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Kask.Control.Monad
+  exposed-modules:     Kask
+                       Kask.Control.Monad
                        Kask.Control.Lens
                        Kask.Data.Function
                        Kask.Data.List
