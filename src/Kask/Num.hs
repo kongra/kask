@@ -14,14 +14,15 @@
 ------------------------------------------------------------------------
 module Kask.Num
        (
-       --   Safe
-       -- , Natural
-       -- , Positive
-       -- , SafeNatural
-       -- , toNatural
-       -- , fromNatural
        )
        where
+
+--   Safe
+-- , Natural
+-- , Positive
+-- , SafeNatural
+-- , toNatural
+-- , fromNatural
 
 -- TODO:
 -- instance Enum Integer

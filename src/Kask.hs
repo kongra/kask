@@ -19,5 +19,5 @@ import Prelude hiding (error)
 type R a = Either String a
 
 error :: String -> R a
-error msg = Left msg
+error = Left
 {-# INLINE error #-}

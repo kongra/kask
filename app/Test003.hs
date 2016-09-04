@@ -15,20 +15,20 @@ test1 = toString $ do
 
 test2 :: ShowS
 test2 = toShowS $ do
-  print   ("aaa"       :: String)
-  printLn $ show (127  ::    Int)
+  print   ("bbb"       :: String)
+  printLn $ show (128  ::    Int)
   printLn ("ąęśćółżźń" :: T.Text)
 
 test3 :: T.Text
 test3 = toText $ do
-  print   ("aaa"       :: String)
-  printLn $ show (127  ::    Int)
+  print   ("ccc"       :: String)
+  printLn $ show (129  ::    Int)
   printLn ("ąęśćółżźń" :: T.Text)
 
 test4 :: IO ()
 test4 = do
-  print   ("aaa"       :: String)
-  printLn $ show (127  ::    Int)
+  print   ("ddd"       :: String)
+  printLn $ show (130  ::    Int)
   printLn ("ąęśćółżźń" :: T.Text)
 
 test5 :: IO ()
