@@ -131,29 +131,3 @@ instance Printable StringBuilder T.Text where
   printLn = printLn . T.unpack
   {-# INLINE print   #-}
   {-# INLINE printLn #-}
-
--- TESTS
-
--- t1 :: String
--- t1 = toString $ do
---   print   ("aaa"       :: String)
---   printLn $ show (127         :: Int)
---   printLn ("ąęśćółżźń" :: T.Text)
-
--- t2 :: ShowS
--- t2 = toShowS $ do
---   print   ("aaa"       :: String)
---   printLn $ show (127         :: Int)
---   printLn ("ąęśćółżźń" :: T.Text)
-
--- t3 :: T.Text
--- t3 = toText $ do
---   print   ("aaa"       :: String)
---   printLn $ show (127         :: Int)
---   printLn ("ąęśćółżźń" :: T.Text)
-
--- t4 :: IO ()
--- t4 = do
---   print   ("aaa"       :: String)
---   printLn $ show (127         :: Int)
---   printLn ("ąęśćółżźń" :: T.Text)

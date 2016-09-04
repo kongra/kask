@@ -24,6 +24,7 @@ library
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search
                        Kask.Logic.Kleene
+                       Kask.Num
                        Kask.Print
                        Kask.Text
                        Kask.Time
@@ -42,6 +43,10 @@ library
 executable kask-exe
   hs-source-dirs:      app
   main-is:             Main.hs
+  other-modules:
+                       Test001
+                       Test002
+                       Test003
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , clock
