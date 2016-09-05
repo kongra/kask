@@ -14,6 +14,9 @@
 ------------------------------------------------------------------------
 module Kask.Bounds
        ( Bounded
+       , Bounds
+       , minBound
+       , maxBound
        , toUnbounded
        , toBounded
        , Natural (Natural)
@@ -21,32 +24,38 @@ module Kask.Bounds
        )
        where
 
-import Kask (R, error)
-import Prelude hiding (Bounded, minBound, maxBound, error)
+import qualified Kask
+import Prelude hiding (Bounded, minBound, maxBound)
 
 newtype Bounded b a = Bounded { toUnbounded :: a } deriving Show;
 
-class Ord a => Bounds b a where
+class (Show b, Show a, Ord a) => Bounds b a where
   minBound :: b -> a -> Maybe a
   maxBound :: b -> a -> Maybe a
 
-checkMinBound :: (Bounds b a) => b -> a -> R a
+checkMinBound :: (Bounds b a) => b -> a -> Kask.R a
 checkMinBound bounds x = case minBound bounds x of
-  Just y  -> if x >= y then Right x else error "UNDERFLOW"
+  Just y  -> if x >= y then Right x else Kask.error $ "TOO LOW " ++
+                                         show bounds ++ " VALUE " ++
+                                         show x
   Nothing -> Right x
+{-# INLINE checkMinBound #-}
 
-checkMaxBound :: (Bounds b a) => b -> a -> R a
+checkMaxBound :: (Bounds b a) => b -> a -> Kask.R a
 checkMaxBound bounds x = case maxBound bounds x of
-  Just y  -> if x <= y then Right x else error "OVERFLOW"
+  Just y  -> if x <= y then Right x else Kask.error $ "TOO HIGH " ++
+                                         show bounds ++ " VALUE " ++
+                                         show x
   Nothing -> Right x
+{-# INLINE checkMaxBound #-}
 
-toBounded :: (Bounds b a) => b -> a -> R (Bounded b a)
+toBounded :: (Bounds b a) => b -> a -> Kask.R (Bounded b a)
 toBounded bounds x =
   fmap Bounded (checkMinBound bounds x >>= checkMaxBound bounds)
 
 -- NATURALS
 
-data Natural = Natural
+data Natural = Natural deriving Show
 
 instance Bounds Natural Int where
   minBound _ _ = Just 0
@@ -62,7 +71,7 @@ instance Bounds Natural Integer where
 
 -- POSITIVE INTEGRALS
 
-data Positive = Positive
+data Positive = Positive deriving Show
 
 instance Bounds Positive Int where
   minBound _ _ = Just 1
