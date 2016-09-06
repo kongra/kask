@@ -1,9 +1,6 @@
 {-# LANGUAGE                  Safe #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE  TypeSynonymInstances #-}
 {-# LANGUAGE     FlexibleInstances #-}
-{-# LANGUAGE      FlexibleContexts #-}
-{-# LANGUAGE       ConstraintKinds #-}
 {-# LANGUAGE     OverloadedStrings #-}
 ------------------------------------------------------------------------
 -- |
@@ -22,11 +19,14 @@ module Kask.Print
        ( Printable
        , printLn
        , print
+
        , TextBuilder
        , toText
+
        , StringBuilder
        , toShowS
        , toString
+
        , evalShowS
        )
        where
