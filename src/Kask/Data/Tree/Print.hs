@@ -4,15 +4,16 @@
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Tree.Print
--- Copyright   : (c) 2014 Konrad Grzanek
+-- Copyright   : (c) 2016-present Konrad Grzanek
 -- License     : BSD-style (see the file LICENSE)
 -- Created     : 2014-10-23
+-- Re-designed : 2016-09-08
 -- Maintainer  : kongra@gmail.com
 -- Stability   : experimental
 -- Portability : portable
 --
 -- UNIX tree command-like representation for rose trees in
--- Haskell. Extensible, writes into monads with use of ShowS.
+-- Haskell.
 ------------------------------------------------------------------------
 module Kask.Data.Tree.Print
        ( Adjs
@@ -23,16 +24,16 @@ module Kask.Data.Tree.Print
        where
 
 import           Control.Monad (unless, forM_)
-import Data.Foldable (toList)
+import           Data.Foldable (toList)
 import qualified Data.Text as T
+import qualified Kask.Bounds as B
 import           Kask.Data.List (markLast)
 import qualified Kask.Print as P
 import           Prelude hiding (Show, show)
-import qualified Kask.Bounds as B
 
 type Adjs a t = Foldable t => a -> t a
 type Show a s = Symbolic s => a -> s
-type Depth = B.Bounded B.Positive Int
+type Depth    = B.Bounded B.Positive Int
 
 printTree :: (P.Printable m s, Symbolic s, Foldable t) =>
              a -> Adjs a t -> Show a s -> Maybe Depth -> m()
@@ -40,16 +41,18 @@ printTree node adjacent show maxDepth =
   doPrintTree node adjacent show (case maxDepth of
                                      Just d  -> B.toUnbounded d - 1
                                      Nothing -> maxBound)
-    0 [True] True
+    0      -- initial level is 0-th
+    [True] -- node has no siblings, so it is the last child of its parent ...
+    True   -- .. and it is the first one
 
 doPrintTree :: (P.Printable m s, Symbolic s, Foldable t) =>
                a -> Adjs a t -> Show a s -> Int -> Int -> [Bool] -> Bool -> m()
-doPrintTree node adjacent show maxDepth level lastChildInfos isFirst = do
+doPrintTree node adjacent show maxDepth level lastChildMarks isFirst = do
   let s    = show node
       pfx  = if isFirst then empty else eol
       repr = if level == 0
              then P.strCat [pfx, s]
-             else P.strCat [pfx, genIndent lastChildInfos, s]
+             else P.strCat [pfx, genIndent lastChildMarks, s]
 
   P.print repr
 
@@ -57,17 +60,16 @@ doPrintTree node adjacent show maxDepth level lastChildInfos isFirst = do
     let children = toList $ adjacent node
     forM_ (zip children (markLast children)) $ \(child, isLast) ->
       doPrintTree child adjacent show maxDepth (level + 1 )
-        (isLast : lastChildInfos) False
-
+        (isLast : lastChildMarks) False
 
 genIndent :: Symbolic s => [Bool] -> s
 genIndent [] = empty -- should not happen anyway
-genIndent (isLast:lastChildInfos) = P.strCat [prefix, suffix]
+genIndent (isLast:lastChildMarks) = P.strCat [prefix, suffix]
   where
     indentSymbol True  = emptyIndent
     indentSymbol False = indent
     suffix  = if isLast then forLastChild else forChild
-    prefix  = P.strCat $ fmap indentSymbol $ reverse $ init lastChildInfos
+    prefix  = P.strCat $ fmap indentSymbol $ reverse $ init lastChildMarks
 
 -- ASCII SYMBOLS
 
