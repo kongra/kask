@@ -26,6 +26,8 @@ module Kask.Data.Tree.Print
 import           Control.Monad (unless, forM_)
 import           Data.Foldable (toList)
 import qualified Data.Text as T
+import qualified Data.Text.Lazy as TL
+import qualified Data.Text.Lazy.Builder as TLB
 import qualified Kask.Bounds as B
 import           Kask.Data.List (markLast)
 import qualified Kask.Print as P
@@ -89,18 +91,34 @@ instance Symbolic String where
   eol          = "\n"
   empty        = ""
 
-instance Symbolic T.Text where
-  indent       = T.pack     (indent       :: String)
-  emptyIndent  = T.pack     (emptyIndent  :: String)
-  forChild     = T.pack     (forChild     :: String)
-  forLastChild = T.pack     (forLastChild :: String)
-  eol          = T.pack     (eol          :: String)
-  empty        = T.pack     (empty        :: String)
-
 instance Symbolic ShowS where
-  indent       = showString (indent       :: String)
-  emptyIndent  = showString (emptyIndent  :: String)
-  forChild     = showString (forChild     :: String)
-  forLastChild = showString (forLastChild :: String)
-  eol          = showString (eol          :: String)
-  empty        = showString (empty        :: String)
+  indent       = showString   (indent       :: String)
+  emptyIndent  = showString   (emptyIndent  :: String)
+  forChild     = showString   (forChild     :: String)
+  forLastChild = showString   (forLastChild :: String)
+  eol          = showString   (eol          :: String)
+  empty        = showString   (empty        :: String)
+
+instance Symbolic T.Text where
+  indent       = T.pack       (indent       :: String)
+  emptyIndent  = T.pack       (emptyIndent  :: String)
+  forChild     = T.pack       (forChild     :: String)
+  forLastChild = T.pack       (forLastChild :: String)
+  eol          = T.pack       (eol          :: String)
+  empty        = T.pack       (empty        :: String)
+
+instance Symbolic TL.Text where
+  indent       = TL.pack      (indent       :: String)
+  emptyIndent  = TL.pack      (emptyIndent  :: String)
+  forChild     = TL.pack      (forChild     :: String)
+  forLastChild = TL.pack      (forLastChild :: String)
+  eol          = TL.pack      (eol          :: String)
+  empty        = TL.pack      (empty        :: String)
+
+instance Symbolic TLB.Builder where
+  indent       = TLB.fromText (indent       :: T.Text)
+  emptyIndent  = TLB.fromText (emptyIndent  :: T.Text)
+  forChild     = TLB.fromText (forChild     :: T.Text)
+  forLastChild = TLB.fromText (forLastChild :: T.Text)
+  eol          = TLB.fromText (eol          :: T.Text)
+  empty        = TLB.fromText (empty        :: T.Text)

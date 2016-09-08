@@ -24,7 +24,8 @@ module Kask.Print
        , toText
 
        , LazyTextBuilder
-       , toLazilyBuiltText
+       , toLazyText
+       , toLazyTextBuilder
 
        , StringBuilder
        , toShowS
@@ -38,10 +39,12 @@ module Kask.Print
        where
 
 import qualified Control.Monad.State.Strict as S
+import           Data.Monoid ((<>))
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import qualified Data.Text.Lazy as TL
 import qualified Data.Text.Lazy.Builder as TLB
+import qualified Data.Text.Lazy.IO as TLIO
 import           Prelude hiding (print)
 
 -- ABSTRACTION
@@ -67,6 +70,18 @@ instance Printable IO ShowS where
 instance Printable IO T.Text where
   print   = TIO.putStr
   printLn = TIO.putStrLn
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable IO TL.Text where
+  print   = TLIO.putStr
+  printLn = TLIO.putStrLn
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable IO TLB.Builder where
+  print   = print   . TLB.toLazyText
+  printLn = printLn . TLB.toLazyText
   {-# INLINE print   #-}
   {-# INLINE printLn #-}
 
@@ -101,14 +116,29 @@ instance Printable TextBuilder T.Text where
     S.put (T.append (T.append buf txt) "\n")
   {-# INLINE printLn #-}
 
+instance Printable TextBuilder TL.Text where
+  print   = print   . TL.toStrict
+  printLn = printLn . TL.toStrict
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable TextBuilder TLB.Builder where
+  print   = print   . TLB.toLazyText
+  printLn = printLn . TLB.toLazyText
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
 -- LAZY TEXT BUILDER
 
 type LazyTextBuilder = S.State TLB.Builder
 
-toLazilyBuiltText :: LazyTextBuilder () -> T.Text
-toLazilyBuiltText tb =
-  TL.toStrict $ TLB.toLazyText $ snd $ S.runState tb $ TLB.fromString ""
-{-# INLINE toLazilyBuiltText #-}
+toLazyTextBuilder :: LazyTextBuilder () -> TLB.Builder
+toLazyTextBuilder tb = snd $ S.runState tb $ TLB.fromString ""
+{-# INLINE toLazyTextBuilder #-}
+
+toLazyText :: LazyTextBuilder () -> TL.Text
+toLazyText = TLB.toLazyText . toLazyTextBuilder
+{-# INLINE toLazyText #-}
 
 instance Printable LazyTextBuilder String where
   print   = print   . T.pack
@@ -123,14 +153,26 @@ instance Printable LazyTextBuilder ShowS where
   {-# INLINE printLn #-}
 
 instance Printable LazyTextBuilder T.Text where
-  print txt = do
+  print   = print   . TLB.fromText
+  printLn = printLn . TLB.fromText
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable LazyTextBuilder TL.Text where
+  print   = print   . TLB.fromLazyText
+  printLn = printLn . TLB.fromLazyText
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable LazyTextBuilder TLB.Builder where
+  print b = do
     builder <- S.get
-    S.put (builder `mappend` TLB.fromText txt)
+    S.put (builder <> b)
   {-# INLINE print #-}
 
-  printLn txt = do
+  printLn b = do
     builder <- S.get
-    S.put (builder `mappend` (TLB.fromText txt `mappend` TLB.fromText "\n"))
+    S.put (builder <> b <> TLB.fromLazyText "\n")
   {-# INLINE printLn #-}
 
 -- STRING BUILDER
@@ -172,6 +214,18 @@ instance Printable StringBuilder T.Text where
   {-# INLINE print   #-}
   {-# INLINE printLn #-}
 
+instance Printable StringBuilder TL.Text where
+  print   = print   . TL.toStrict
+  printLn = printLn . TL.toStrict
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable StringBuilder TLB.Builder where
+  print   = print   . TLB.toLazyText
+  printLn = printLn . TLB.toLazyText
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
 -- CONCATENATION OF TEXTUAL DATA IS PRINTING INTO BUILDERS
 
 class StrCat c where
@@ -187,4 +241,12 @@ instance StrCat ShowS where
 
 instance StrCat T.Text where
   strCat = toText . mapM_ print
+  {-# INLINE strCat #-}
+
+instance StrCat TL.Text where
+  strCat = toLazyText . mapM_ print
+  {-# INLINE strCat #-}
+
+instance StrCat TLB.Builder where
+  strCat = toLazyTextBuilder . mapM_ print
   {-# INLINE strCat #-}
