@@ -1,7 +1,5 @@
-{-# LANGUAGE Safe                  #-}
-{-# LANGUAGE RankNTypes            #-}
-{-# LANGUAGE FlexibleContexts      #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE              Safe #-}
+{-# LANGUAGE FlexibleInstances #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Tree.Print
@@ -20,6 +18,7 @@ module Kask.Data.Tree.Print
        )
        where
 
+import qualified Data.Text as T
 -- import qualified Kask.Print as P
 
 --     (
@@ -45,7 +44,7 @@ module Kask.Data.Tree.Print
 -- import Control.Monad (forM)
 -- import Control.Monad.Identity (Identity)
 -- import Data.Maybe (fromMaybe)
--- import Kask.Data.Function (compose, rcompose)
+--
 -- import Kask.Data.List (markLast)
 
 -- -- | A relation between the monad in which the print is performed, the
@@ -142,18 +141,40 @@ module Kask.Data.Tree.Print
 --     indentSymbol True  = emptyIndent
 --     indentSymbol False = indent
 
--- -- ASCII SYMBOLS
+-- indentSymbol :: Symbolic s => Bool -> s
+-- indentSymbol True  = emptyIndent
+-- indentSymbol False = indent
 
--- indent       :: ShowS
--- emptyIndent  :: ShowS
--- forChild     :: ShowS
--- forLastChild :: ShowS
--- eol          :: ShowS
--- empty        :: ShowS
+-- ASCII SYMBOLS
 
--- indent       = showString "│   "
--- emptyIndent  = showString "    "
--- forChild     = showString "├── "
--- forLastChild = showString "└── "
--- eol          = showString "\n"
--- empty        = showString ""
+class Symbolic s where
+  indent       :: s
+  emptyIndent  :: s
+  forChild     :: s
+  forLastChild :: s
+  eol          :: s
+  empty        :: s
+
+instance Symbolic String where
+  indent       = "│   "
+  emptyIndent  = "    "
+  forChild     = "├── "
+  forLastChild = "└── "
+  eol          = "\n"
+  empty        = ""
+
+instance Symbolic T.Text where
+  indent       = T.pack     (indent       :: String)
+  emptyIndent  = T.pack     (emptyIndent  :: String)
+  forChild     = T.pack     (forChild     :: String)
+  forLastChild = T.pack     (forLastChild :: String)
+  eol          = T.pack     (eol          :: String)
+  empty        = T.pack     (empty        :: String)
+
+instance Symbolic ShowS where
+  indent       = showString (indent       :: String)
+  emptyIndent  = showString (emptyIndent  :: String)
+  forChild     = showString (forChild     :: String)
+  forLastChild = showString (forLastChild :: String)
+  eol          = showString (eol          :: String)
+  empty        = showString (empty        :: String)

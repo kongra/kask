@@ -28,11 +28,14 @@ module Kask.Print
        , toString
 
        , evalShowS
+
+       , StrCat
+       , strCat
        )
        where
 
 import qualified Control.Monad.State.Strict as S
-import           Data.Text as T
+import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import           Prelude hiding (print)
 
@@ -66,7 +69,7 @@ instance Printable IO T.Text where
 
 type TextBuilder = S.State T.Text
 
-toText :: TextBuilder () -> Text
+toText :: TextBuilder () -> T.Text
 toText tb = snd (S.runState tb "")
 {-# INLINE toText #-}
 
@@ -131,3 +134,20 @@ instance Printable StringBuilder T.Text where
   printLn = printLn . T.unpack
   {-# INLINE print   #-}
   {-# INLINE printLn #-}
+
+-- CONCATENATION OF TEXTUAL DATA IS PRINTING INTO BUILDERS
+
+class StrCat c where
+  strCat :: (Foldable t) => t c -> c
+
+instance StrCat String where
+  strCat = toString . mapM_ print
+  {-# INLINE strCat #-}
+
+instance StrCat ShowS where
+  strCat = toShowS . mapM_ print
+  {-# INLINE strCat #-}
+
+instance StrCat T.Text where
+  strCat = toText . mapM_ print
+  {-# INLINE strCat #-}

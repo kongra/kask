@@ -8,6 +8,7 @@ import qualified Test002
 import qualified Test003
 import qualified Test004
 -- import qualified Test005
+import qualified Test006
 
 main :: IO ()
 main = do
@@ -16,3 +17,4 @@ main = do
   Test003.test5
   Test004.test1
   -- Test005.test1
+  Test006.test
