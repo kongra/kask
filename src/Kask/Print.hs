@@ -23,6 +23,9 @@ module Kask.Print
        , TextBuilder
        , toText
 
+       , LazyTextBuilder
+       , toLazilyBuiltText
+
        , StringBuilder
        , toShowS
        , toString
@@ -37,6 +40,8 @@ module Kask.Print
 import qualified Control.Monad.State.Strict as S
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
+import qualified Data.Text.Lazy as TL
+import qualified Data.Text.Lazy.Builder as TLB
 import           Prelude hiding (print)
 
 -- ABSTRACTION
@@ -94,6 +99,38 @@ instance Printable TextBuilder T.Text where
   printLn txt = do
     buf <- S.get
     S.put (T.append (T.append buf txt) "\n")
+  {-# INLINE printLn #-}
+
+-- LAZY TEXT BUILDER
+
+type LazyTextBuilder = S.State TLB.Builder
+
+toLazilyBuiltText :: LazyTextBuilder () -> T.Text
+toLazilyBuiltText tb =
+  TL.toStrict $ TLB.toLazyText $ snd $ S.runState tb $ TLB.fromString ""
+{-# INLINE toLazilyBuiltText #-}
+
+instance Printable LazyTextBuilder String where
+  print   = print   . T.pack
+  printLn = printLn . T.pack
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable LazyTextBuilder ShowS where
+  print   = print   . evalShowS
+  printLn = printLn . evalShowS
+  {-# INLINE print   #-}
+  {-# INLINE printLn #-}
+
+instance Printable LazyTextBuilder T.Text where
+  print txt = do
+    builder <- S.get
+    S.put (builder `mappend` TLB.fromText txt)
+  {-# INLINE print #-}
+
+  printLn txt = do
+    builder <- S.get
+    S.put (builder `mappend` (TLB.fromText txt `mappend` TLB.fromText "\n"))
   {-# INLINE printLn #-}
 
 -- STRING BUILDER

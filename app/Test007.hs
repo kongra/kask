@@ -5,7 +5,7 @@ module Test007 where
 import qualified Data.Text            as T
 import qualified Kask.Bounds          as B
 import qualified Kask.Data.Tree.Print as PT
--- import qualified Kask.Print           as P
+import qualified Kask.Print           as P
 
 depth :: Int -> Maybe PT.Depth
 depth d = case B.toBounded B.Positive d of
@@ -94,5 +94,10 @@ intAdjs i = take m $ iterate (1+) (10 * i)
 intShow1 :: N -> T.Text
 intShow1 (N i) = T.pack $ show i
 
-test31 :: IO ()
+test31 :: IO () -- DIRECT IO
 test31 = PT.printTree (N 1) intAdjs intShow1 (depth n)
+
+test32 :: IO () -- BUILDING TEXT AND THEN IO
+test32 =
+  P.printLn $ P.toLazilyBuiltText $
+    PT.printTree (N 1) intAdjs intShow1 (depth n)

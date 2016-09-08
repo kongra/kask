@@ -19,4 +19,5 @@ main = do
   -- Test004.test1
   -- Test005.test1
   -- Test006.test
-  Test007.test31
+  -- Test007.test31
+  Test007.test32
