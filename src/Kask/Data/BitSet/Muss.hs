@@ -22,6 +22,7 @@ module Kask.Data.BitSet.Muss
        , aget
        , aset
        , aclone
+       , countBits
        )
        where
 
@@ -53,6 +54,9 @@ aset = MA.writeArray
 aclone :: ArrC a m => Array a -> m (Array a)
 aclone = MA.mapArray id
 {-# INLINE aclone #-}
+
+countBits :: ArrC a m => Array a -> m Int
+countBits = undefined
 
 -- API
 

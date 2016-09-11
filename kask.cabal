@@ -19,6 +19,7 @@ library
                        Kask.Bounds
                        Kask.Control.Monad
                        Kask.Control.Lens
+                       Kask.Data.Array.MArray
                        Kask.Data.BitSet.Muss
                        Kask.Data.Function
                        Kask.Data.List
