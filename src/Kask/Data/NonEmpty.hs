@@ -1,4 +1,5 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE          Safe #-}
+{-# LANGUAGE DeriveGeneric #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.NonEmpty
@@ -25,11 +26,13 @@ module Kask.Data.NonEmpty
        where
 
 import qualified Data.HashMap.Strict as Map
-import qualified Data.HashSet        as Set
+import qualified Data.HashSet as Set
+import           Data.Hashable (Hashable)
+import           GHC.Generics (Generic)
 
 -- NON-EMPTY LIST
 
-newtype List a = List [a] deriving (Eq)
+newtype List a = List [a] deriving (Eq, Generic)
 
 fromList :: [a] -> Maybe (List a)
 fromList [] = Nothing
@@ -44,9 +47,11 @@ instance Show a => Show (List a) where
   show (List l) = show l
   {-# INLINE show #-}
 
+instance Hashable a => Hashable (List a)
+
 -- NON-EMPTY SET
 
-newtype HashSet a = HashSet (Set.HashSet a) deriving (Eq)
+newtype HashSet a = HashSet (Set.HashSet a) deriving (Eq, Generic)
 
 fromHashSet :: Set.HashSet a-> Maybe (HashSet a)
 fromHashSet s
@@ -62,9 +67,11 @@ instance Show a => Show (HashSet a) where
   show (HashSet s) = show s
   {-# INLINE show #-}
 
+instance Hashable a => Hashable (HashSet a)
+
 -- NON-EMPTY MAP
 
-newtype HashMap k v = HashMap (Map.HashMap k v) deriving (Eq)
+newtype HashMap k v = HashMap (Map.HashMap k v) deriving (Eq, Generic)
 
 fromHashMap :: Map.HashMap k v -> Maybe (HashMap k v)
 fromHashMap m
@@ -79,3 +86,5 @@ toHashMap (HashMap m) = m
 instance (Show k, Show v) => Show (HashMap k v) where
   show (HashMap m) = show m
   {-# INLINE show #-}
+
+instance (Hashable k, Hashable v) => Hashable (HashMap k v)
