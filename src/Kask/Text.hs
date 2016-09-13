@@ -1,4 +1,5 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE          Safe #-}
+{-# LANGUAGE DeriveGeneric #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Text
@@ -21,19 +22,18 @@ module Kask.Text
        )
        where
 
-import Data.Hashable (Hashable, hashWithSalt)
+import Data.Hashable (Hashable)
 import Data.Text (Text, strip, null)
+import GHC.Generics (Generic)
 import Prelude hiding (null)
 
 class ShowText a where
   showText :: a -> Text
 
 -- | Trimmed, non-blank Text
-newtype Trimmed = Trimmed Text deriving Eq
+newtype Trimmed = Trimmed Text deriving (Eq, Generic)
 
-instance Hashable Trimmed where
-  hashWithSalt salt (Trimmed txt) = salt `hashWithSalt` txt
-  {-# INLINE hashWithSalt #-}
+instance Hashable Trimmed
 
 instance Show Trimmed where
   show (Trimmed txt) = show txt
