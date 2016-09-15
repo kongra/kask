@@ -16,7 +16,7 @@ module Kask.Text
        ( Trimmed
        , trimmed
        , ShowText
-       , show
+       , showText
        , ShowTrimmed
        , showTrimmed
        )
