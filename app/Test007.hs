@@ -5,14 +5,12 @@ module Test007 where
 import qualified Data.Text              as T
 import qualified Data.Text.Lazy         as TL
 import qualified Data.Text.Lazy.Builder as TLB
-import qualified Kask.Bounds            as B
+import qualified Kask.Constr            as C
 import qualified Kask.Data.Tree.Print   as PT
 import qualified Kask.Print             as P
 
 depth :: Int -> Maybe PT.Depth
-depth d = case B.toBounded B.Positive d of
-  Right b -> Just b
-  Left  e -> error e
+depth = C.constr (C.BoundsConstr C.Positive)
 
 -- TEST 1 - SINGLE NODE TREE
 

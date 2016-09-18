@@ -28,20 +28,20 @@ import           Data.Foldable (toList)
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 import qualified Data.Text.Lazy.Builder as TLB
-import qualified Kask.Bounds as B
+import qualified Kask.Constr as C
 import           Kask.Data.List (markLast)
 import qualified Kask.Print as P
 import           Prelude hiding (Show, show)
 
 type Adjs a t = Foldable t => a -> t a
 type Show a s = Symbolic s => a -> s
-type Depth    = B.Bounded B.Positive Int
+type Depth    = C.Constr (C.BoundsConstr C.Positive) Int
 
 printTree :: (P.Printable m s, Symbolic s, Foldable t) =>
              a -> Adjs a t -> Show a s -> Maybe Depth -> m()
 printTree node adjacent show maxDepth =
   doPrintTree node adjacent show (case maxDepth of
-                                     Just d  -> B.toUnbounded d - 1
+                                     Just d  -> C.unconstr d - 1
                                      Nothing -> maxBound)
     0      -- initial level is 0-th
     [True] -- node has no siblings, so it is the last child of its parent ...

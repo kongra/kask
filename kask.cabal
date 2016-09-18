@@ -16,7 +16,6 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Kask
-                       Kask.Bounds
                        Kask.Constr
                        Kask.Control.Monad
                        Kask.Control.Lens
@@ -24,7 +23,6 @@ library
                        Kask.Data.BitSet.Muss
                        Kask.Data.Function
                        Kask.Data.List
-                       Kask.Data.NonEmpty
                        Kask.Data.Sequence
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search

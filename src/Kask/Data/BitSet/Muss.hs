@@ -29,10 +29,10 @@ module Kask.Data.BitSet.Muss
 -- import qualified Data.Array.IO as MAIO
 import qualified Data.Array.MArray as MA
 import           Data.Word (Word64)
-import qualified Kask.Bounds as B
+import qualified Kask.Constr as C
 -- import qualified Kask.Print as P
 
-type Size = B.Bounded B.Positive Int
+type Size = C.Constr (C.BoundsConstr C.Positive) Int
 
 -- STORAGE
 
@@ -40,7 +40,7 @@ type ArrC  a m = MA.MArray a Word64 m -- Array Context/Constraints
 type Array a   = (a Int Word64)
 
 newArray :: ArrC a m => Size -> m (Array a)
-newArray size = MA.newArray (0, B.toUnbounded size - 1) 0
+newArray size = MA.newArray (0, C.unconstr size - 1) 0
 {-# INLINE newArray #-}
 
 aget :: ArrC a m => Array a -> Int -> m Word64
