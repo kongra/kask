@@ -1,6 +1,7 @@
 {-# LANGUAGE                  Safe #-}
 {-# LANGUAGE     FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE         DeriveGeneric #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Constr
@@ -38,23 +39,26 @@ module Kask.Constr
        where
 
 import qualified Data.ByteString
+import qualified Data.HashMap.Strict
+import qualified Data.HashSet
+import           Data.Hashable (Hashable)
 import qualified Data.IntMap.Strict
 import qualified Data.IntSet
 import qualified Data.Map.Strict
-import qualified Data.Set
 import qualified Data.Sequence
+import qualified Data.Set
 import qualified Data.Text
-import qualified Data.HashMap.Strict
-import qualified Data.HashSet
-
-import Prelude hiding (minBound, maxBound)
+import           GHC.Generics (Generic)
+import           Prelude hiding (minBound, maxBound)
 
 -- ABSTRACTION
 
 class Constraint c a where
   satisfies :: c -> a -> Bool
 
-newtype Constr c a = Constr { unconstr :: a } deriving Show;
+newtype Constr c a = Constr { unconstr :: a } deriving (Show, Eq, Generic);
+
+instance Hashable a => Hashable (Constr c a)
 
 constr :: (Constraint c a) => c -> a -> Maybe (Constr c a)
 constr c x
