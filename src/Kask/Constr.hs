@@ -37,6 +37,16 @@ module Kask.Constr
        )
        where
 
+import qualified Data.ByteString
+import qualified Data.IntMap.Strict
+import qualified Data.IntSet
+import qualified Data.Map.Strict
+import qualified Data.Set
+import qualified Data.Sequence
+import qualified Data.Text
+import qualified Data.HashMap.Strict
+import qualified Data.HashSet
+
 import Prelude hiding (minBound, maxBound)
 
 -- ABSTRACTION
@@ -68,6 +78,43 @@ instance (IsNull a) => Constraint NonNull a where
 instance IsNull [a] where
   isNull = null
   {-# INLINE isNull #-}
+
+instance IsNull Data.ByteString.ByteString where
+  isNull = Data.ByteString.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.IntMap.Strict.IntMap a) where
+  isNull = Data.IntMap.Strict.null
+  {-# INLINE isNull #-}
+
+instance IsNull Data.IntSet.IntSet where
+  isNull = Data.IntSet.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.Map.Strict.Map k v) where
+  isNull = Data.Map.Strict.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.Set.Set a) where
+  isNull = Data.Set.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.HashMap.Strict.HashMap k v) where
+  isNull = Data.HashMap.Strict.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.HashSet.HashSet a) where
+  isNull = Data.HashSet.null
+  {-# INLINE isNull #-}
+
+instance IsNull Data.Text.Text where
+  isNull = Data.Text.null
+  {-# INLINE isNull #-}
+
+instance IsNull (Data.Sequence.Seq a) where
+  isNull = Data.Sequence.null
+  {-# INLINE isNull #-}
+
 
 -- NUMERIC BOUNDS
 
