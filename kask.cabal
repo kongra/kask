@@ -17,6 +17,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Kask
                        Kask.Bounds
+                       Kask.Constr
                        Kask.Control.Monad
                        Kask.Control.Lens
                        Kask.Data.Array.MArray
