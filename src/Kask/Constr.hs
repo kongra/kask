@@ -119,10 +119,9 @@ instance IsNull (Data.Sequence.Seq a) where
   isNull = Data.Sequence.null
   {-# INLINE isNull #-}
 
-
 -- NUMERIC BOUNDS
 
-class (Show b, Show a, Ord a) => Bounds b a where
+class (Ord a) => Bounds b a where
   minBound :: b -> a -> Maybe a
   maxBound :: b -> a -> Maybe a
 
