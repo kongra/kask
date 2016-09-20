@@ -232,21 +232,25 @@ class StrCat c where
   strCat :: (Foldable t) => t c -> c
 
 instance StrCat String where
-  strCat = toString . mapM_ print
+  strCat = strCatWith toString
   {-# INLINE strCat #-}
 
 instance StrCat ShowS where
-  strCat = toShowS . mapM_ print
+  strCat = strCatWith toShowS
   {-# INLINE strCat #-}
 
 instance StrCat T.Text where
-  strCat = toText . mapM_ print
+  strCat = strCatWith toText
   {-# INLINE strCat #-}
 
 instance StrCat TL.Text where
-  strCat = toLazyText . mapM_ print
+  strCat = strCatWith toLazyText
   {-# INLINE strCat #-}
 
 instance StrCat TLB.Builder where
-  strCat = toLazyTextBuilder . mapM_ print
+  strCat = strCatWith toLazyTextBuilder
   {-# INLINE strCat #-}
+
+strCatWith :: (Printable m c, Foldable t) => (m () -> c) -> t c -> c
+strCatWith f = f . mapM_ print
+{-# INLINE strCatWith #-}
