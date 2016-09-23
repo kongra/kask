@@ -48,7 +48,7 @@ flags: {}
 extra-package-dbs: []
 
 ghc-options:
-  "*": -O2 -W -Wall -Werror -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -funbox-strict-fields
+  "*": -O2 -W -Wall -Werror -fwarn-incomplete-uni-patterns -fwarn-incomplete-record-updates -funbox-strict-fields -fllvm
 
 # Control whether we use the GHC we find on the path
 # system-ghc: true

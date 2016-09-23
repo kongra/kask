@@ -10,6 +10,7 @@ module Main where
 -- import qualified Test005
 -- import qualified Test006
 import qualified Test007
+-- import qualified Test008
 
 main :: IO ()
 main = do
@@ -21,3 +22,5 @@ main = do
   -- Test006.test
   -- Test007.test31
   Test007.test32
+  -- Test008.test1
+  -- Test008.test2

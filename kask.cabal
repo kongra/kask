@@ -55,6 +55,7 @@ executable kask-exe
                        Test005
                        Test006
                        Test007
+                       Test008
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , kask
