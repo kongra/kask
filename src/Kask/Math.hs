@@ -1,4 +1,5 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE Trustworthy #-}
+{-# LANGUAGE   MagicHash #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Math
@@ -12,17 +13,24 @@
 ------------------------------------------------------------------------
 module Kask.Math
     ( nthNaiveFib
+    , nthNaiveUnpackedFib
     , nthFib
     )
     where
 
 import Data.Word (Word64)
+import GHC.Exts
 
 nthNaiveFib :: Word64 -> Word64
 nthNaiveFib 0 = 0
 nthNaiveFib 1 = 1
 nthNaiveFib n = nthNaiveFib (n - 1) + nthNaiveFib (n - 2)
-{-# NOINLINE nthNaiveFib #-}
+
+nthNaiveUnpackedFib :: Int# -> Int#
+nthNaiveUnpackedFib 0# = 0#
+nthNaiveUnpackedFib 1# = 1#
+nthNaiveUnpackedFib n = nthNaiveUnpackedFib (n -# 1#) +#
+                        nthNaiveUnpackedFib (n -# 2#)
 
 nthFib :: Word64 -> Integer
 nthFib 0 = 0
