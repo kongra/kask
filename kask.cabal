@@ -27,6 +27,7 @@ library
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search
                        Kask.Logic.Kleene
+                       Kask.Math
                        Kask.Print
                        Kask.Text
                        Kask.Time
