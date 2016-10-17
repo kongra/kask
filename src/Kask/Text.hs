@@ -16,7 +16,7 @@
 module Kask.Text
        ( NonBlank
        , Stripped
-       , NonBlankStripped
+       , StrippedNonBlank
        , ShowText
        , strip
        , stripNonBlank
@@ -65,8 +65,8 @@ instance C.IsNull Stripped where
 -- | Non-blank textual content
 
 type NonBlank         = C.Constr C.NonNull T.Text
-type NonBlankStripped = C.Constr C.NonNull Stripped
+type StrippedNonBlank = C.Constr C.NonNull Stripped
 
-stripNonBlank :: Strip a => a -> Maybe NonBlankStripped
+stripNonBlank :: Strip a => a -> Maybe StrippedNonBlank
 stripNonBlank = C.constr C.NonNull . strip
 {-# INLINE stripNonBlank #-}
