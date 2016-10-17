@@ -1,5 +1,6 @@
-{-# LANGUAGE          Safe #-}
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE              Safe #-}
+{-# LANGUAGE     DeriveGeneric #-}
+{-# LANGUAGE FlexibleInstances #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Text
@@ -13,45 +14,59 @@
 -- Misc. functionalities related to Text; constructors, validators, etc.
 ------------------------------------------------------------------------
 module Kask.Text
-       ( Trimmed
-       , trimmed
+       ( NonBlank
+       , Stripped
+       , NonBlankStripped
        , ShowText
+       , strip
+       , stripNonBlank
        , showText
-       , ShowTrimmed
-       , showTrimmed
        )
        where
 
-import Data.Hashable (Hashable)
-import Data.Text (Text, strip, null)
-import GHC.Generics (Generic)
-import Prelude hiding (null)
+import           Data.Hashable (Hashable)
+import qualified Data.Text as T
+import           GHC.Generics (Generic)
+import qualified Kask.Constr as C
 
 class ShowText a where
-  showText :: a -> Text
+  showText :: a -> T.Text
 
--- | Trimmed, non-blank Text
-newtype Trimmed = Trimmed Text deriving (Eq, Generic)
+-- | Stripped text
+newtype Stripped = Stripped T.Text deriving (Eq, Generic)
 
-instance Hashable Trimmed
+instance Hashable Stripped
 
-instance Show Trimmed where
-  show (Trimmed txt) = show txt
+instance Show Stripped where
+  show (Stripped txt) = show txt
   {-# INLINE show #-}
 
-instance ShowText Trimmed where
-  showText (Trimmed txt) = txt
+instance ShowText Stripped where
+  showText (Stripped txt) = txt
   {-# INLINE showText #-}
 
-class ShowTrimmed a where
-  showTrimmed :: a -> Trimmed
+class Strip a where
+  strip :: a -> Stripped
 
-instance ShowTrimmed Trimmed where
-  showTrimmed = id
-  {-# INLINE showTrimmed #-}
+instance Strip T.Text where
+  strip = Stripped . T.strip
+  {-# INLINE strip #-}
 
-trimmed :: Text -> Maybe Trimmed
-trimmed s
-  | null tr   = Nothing
-  | otherwise = Just (Trimmed tr)
-  where tr = strip s
+instance Strip String where
+  strip = strip . T.pack
+  {-# INLINE strip #-}
+
+-- | NonNull constraint for Stripped
+
+instance C.IsNull Stripped where
+  isNull (Stripped txt) = C.isNull txt
+  {-# INLINE isNull #-}
+
+-- | Non-blank textual content
+
+type NonBlank         = C.Constr C.NonNull T.Text
+type NonBlankStripped = C.Constr C.NonNull Stripped
+
+stripNonBlank :: Strip a => a -> Maybe NonBlankStripped
+stripNonBlank = C.constr C.NonNull . strip
+{-# INLINE stripNonBlank #-}
