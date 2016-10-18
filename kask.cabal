@@ -22,10 +22,9 @@ library
                        -fllvm
 
   hs-source-dirs:      src
-  exposed-modules:     Kask
-                       Kask.Constr
-                       Kask.Control.Monad
+  exposed-modules:     Kask.Constr
                        Kask.Control.Lens
+                       Kask.Control.Monad
                        Kask.Data.Array.MArray
                        Kask.Data.BitSet.Muss
                        Kask.Data.Function
@@ -33,6 +32,7 @@ library
                        Kask.Data.Sequence
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search
+                       Kask.Exception
                        Kask.Logic.Kleene
                        Kask.Math
                        Kask.Print
@@ -40,15 +40,17 @@ library
                        Kask.Time
 
   build-depends:       base >= 4.7 && < 5
-                     , containers
-                     , transformers
-                     , mtl
-                     , clock
-                     , text
-                     , hashable
-                     , unordered-containers
                      , array
+                     , async
                      , bytestring
+                     , clock
+                     , containers
+                     , deepseq
+                     , hashable
+                     , mtl
+                     , text
+                     , transformers
+                     , unordered-containers
 
   default-language:    Haskell2010
 
