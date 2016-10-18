@@ -38,8 +38,8 @@ catchAny action onE = tryAny action >>= either onE return
 
 tryAnyDeep :: NFData a => IO a -> IO (Either SomeException a)
 tryAnyDeep action = tryAny $ do
-    res <- action
-    evaluate $!! res -- here's the magic
+  res <- action
+  evaluate $!! res -- here's the magic
 {-# INLINE tryAnyDeep #-}
 
 catchAnyDeep :: NFData a => IO a -> (SomeException -> IO a) -> IO a
