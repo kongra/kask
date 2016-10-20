@@ -24,9 +24,11 @@ module Kask.Text
        )
        where
 
-import           Data.Hashable (Hashable)
-import qualified Data.Text as T
-import           GHC.Generics (Generic)
+import Control.DeepSeq (NFData  )
+import Data.Hashable   (Hashable)
+import GHC.Generics    (Generic )
+
+import qualified Data.Text   as T
 import qualified Kask.Constr as C
 
 class ShowText a where
@@ -36,6 +38,7 @@ class ShowText a where
 newtype Stripped = Stripped T.Text deriving (Eq, Generic)
 
 instance Hashable Stripped
+instance NFData   Stripped
 
 instance Show Stripped where
   show (Stripped txt) = show txt
