@@ -38,18 +38,21 @@ module Kask.Constr
        )
        where
 
+import Control.DeepSeq (NFData  )
+import Data.Hashable   (Hashable)
+import GHC.Generics    (Generic )
+
 import qualified Data.ByteString
 import qualified Data.HashMap.Strict
 import qualified Data.HashSet
-import           Data.Hashable (Hashable)
 import qualified Data.IntMap.Strict
 import qualified Data.IntSet
 import qualified Data.Map.Strict
 import qualified Data.Sequence
 import qualified Data.Set
 import qualified Data.Text
-import           GHC.Generics (Generic)
-import           Prelude hiding (minBound, maxBound)
+
+import Prelude hiding (minBound, maxBound)
 
 -- ABSTRACTION
 
@@ -59,6 +62,7 @@ class Constraint c a where
 newtype Constr c a = Constr { unconstr :: a } deriving (Show, Eq, Generic);
 
 instance Hashable a => Hashable (Constr c a)
+instance NFData   a => NFData   (Constr c a)
 
 constr :: (Constraint c a) => c -> a -> Maybe (Constr c a)
 constr c x
