@@ -1,5 +1,6 @@
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE   MagicHash #-}
+{-# LANGUAGE  Trustworthy #-}
+{-# LANGUAGE    MagicHash #-}
+{-# LANGUAGE BangPatterns #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Math
@@ -15,6 +16,7 @@ module Kask.Math
     ( nthNaiveFib
     , nthNaiveUnpackedFib
     , nthFib
+    , fib
     )
     where
 
@@ -37,6 +39,20 @@ nthFib 0 = 0
 nthFib 1 = 1
 nthFib n = loop 0 1 n
   where
-    loop a _ 0  = a
-    loop a b n' = loop b (a + b) (n' - 1)
+    loop !a !_  0  = a
+    loop !a !b !n' = loop b (a + b) (n' - 1)
 {-# INLINABLE nthFib #-}
+
+-- INFINITE FIB SEQUENCE
+
+data FibGen = FibGen !Integer !Integer
+
+fibgen :: FibGen -> FibGen
+fibgen (FibGen a b) = FibGen b (a + b)
+
+fibfst :: FibGen -> Integer
+fibfst (FibGen a _) = a
+
+fib :: () -> [Integer]
+fib _ = map fibfst $ iterate fibgen $FibGen 0 1
+{-# INLINABLE fib #-}
