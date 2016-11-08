@@ -32,7 +32,6 @@ library
                        Kask.Data.Sequence
                        Kask.Data.Tree.Print
                        Kask.Data.Tree.Search
-                       Kask.Exception
                        Kask.Logic.Kleene
                        Kask.Math
                        Kask.Print
