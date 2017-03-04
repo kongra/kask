@@ -45,7 +45,7 @@ printTree node adjacent show maxDepth =
                                      Nothing -> maxBound)
     0      -- initial level is 0-th
     [True] -- node has no siblings, so it is the last child of its parent ...
-    True   -- .. and it is the first one
+    True   -- ... and it is the first one
 
 doPrintTree :: (P.Printable m s, Symbolic s, Foldable t) =>
                a -> Adjs a t -> Show a s -> Int -> Int -> [Bool] -> Bool -> m()
