@@ -1,17 +1,17 @@
-name:                kask
-version:             0.1.0.0
-synopsis:            Initial project template from stack
-description:         Please see README.md
-homepage:            https://github.com/kongra/kask#readme
-license:             BSD3
-license-file:        LICENSE
-author:              Konrad Grzanek
-maintainer:          kongra@gmail.com
-copyright:           (c) 2016-present Konrad Grzanek
-category:            Research
-build-type:          Simple
+name:                  kask
+version:               0.1.0.0
+synopsis:              Initial project template from stack
+description:           Please see README.md
+homepage:              https://github.com/kongra/kask#readme
+license:               BSD3
+license-file:          LICENSE
+author:                Konrad Grzanek
+maintainer:            kongra@gmail.com
+copyright:             (c) 2016-present Konrad Grzanek
+category:              Research
+build-type:            Simple
 -- extra-source-files:
-cabal-version:       >=1.10
+cabal-version:         >= 1.10
 
 library
   ghc-options:         -O2 -W -Wall -Werror
