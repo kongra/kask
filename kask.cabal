@@ -65,6 +65,7 @@ executable kask-exe
                        Test006
                        Test007
                        Test008
+                       Test009
 
   ghc-options:         -O2 -W -Wall -Werror
                        -fwarn-incomplete-uni-patterns
@@ -77,6 +78,9 @@ executable kask-exe
   build-depends:       base
                      , kask
                      , text
+                     , bytestring
+                     , containers
+                     , unordered-containers
   default-language:    Haskell2010
 
 test-suite kask-test
