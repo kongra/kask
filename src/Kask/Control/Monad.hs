@@ -25,32 +25,32 @@ module Kask.Control.Monad
 import Control.Monad (when, unless)
 import Data.Foldable (toList)
 
--- | A version of when that works on m Bool rather than raw Bool.
+-- | A version of when that works on m Bool rather than raw Bool
 whenM :: Monad m => m Bool -> m () -> m ()
 whenM p s = p >>= flip when s
 {-# INLINE whenM #-}
 
--- | A version of unless that works on m Bool rather than raw Bool.
+-- | A version of unless that works on m Bool rather than raw Bool
 unlessM :: Monad m => m Bool -> m () -> m ()
 unlessM p s = p >>= flip unless s
 {-# INLINE unlessM #-}
 
--- | A version of mapM that works on m [a] rather than raw [a].
+-- | A version of mapM that works on m [a] rather than raw [a]
 mapMM :: Monad m => (a -> m b) -> m [a] -> m [b]
 mapMM f as = as >>= mapM f
 {-# INLINE mapMM #-}
 
--- | A version of mapM_ that works on m [a] rather than raw [a].
+-- | A version of mapM_ that works on m [a] rather than raw [a]
 mapMM_ :: Monad m => (a -> m b) -> m [a] -> m ()
 mapMM_ f as = as >>= mapM_ f
 {-# INLINE mapMM_ #-}
 
--- | A version of forM_ that works on m [a] rather than raw [a].
+-- | A version of forM_ that works on m [a] rather than raw [a]
 forMM_ :: Monad m => m [a] -> (a -> m b) -> m ()
 forMM_ = flip mapMM_
 {-# INLINE forMM_ #-}
 
--- | A monadic version of Data.Foldable.toList.
+-- | A monadic version of Data.Foldable.toList
 toListM :: (Monad m, Foldable f) => m (f a) -> m [a]
 toListM = fmap toList
 {-# INLINE toListM #-}
