@@ -54,5 +54,5 @@ fibfst :: FibGen -> Integer
 fibfst (FibGen a _) = a
 
 fib :: () -> [Integer]
-fib _ = map fibfst $ iterate fibgen $FibGen 0 1
+fib _ = map fibfst $ iterate fibgen $ FibGen 0 1
 {-# INLINABLE fib #-}
