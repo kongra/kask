@@ -66,6 +66,7 @@ executable kask-exe
                        Test007
                        Test008
                        Test009
+                       Test010
 
   ghc-options:         -O2 -W -Wall -Werror
                        -fwarn-incomplete-uni-patterns
