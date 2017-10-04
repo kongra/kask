@@ -14,6 +14,6 @@ fibcount n = FibCount (v1 + v2) (c1 + c2 + 1)
 
 test1 :: IO ()
 test1 = do
-  putStrLn (show (fibcount 42))
-  putStrLn (show (fibcount 43))
-  putStrLn (show (fibcount 44))
+  print (fibcount 42)
+  print (fibcount 43)
+  print (fibcount 44)
