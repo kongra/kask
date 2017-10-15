@@ -4,14 +4,16 @@ module Test011 where
 
 import Data.Maybe (fromJust)
 
-gen :: Int -> Maybe Int
+type Value = Int
+
+gen :: Value -> Maybe Value
 gen n = Just (n + 1)
 
-experiment :: Int -> IO ()
+experiment :: Value -> IO ()
 experiment n = do
   print $ "Performing experiment " ++ show n
   print $ loop 0 1 where
-    loop :: Int -> Int -> Int
+    loop :: Value -> Value -> Value
     loop s i = if i == (1000000000 + n) then s else loop (s + (fromJust (gen i))) (i + 1)
 
 test1 :: IO ()
