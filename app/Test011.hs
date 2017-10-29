@@ -14,7 +14,7 @@ experiment n = do
   print $ "Performing experiment " ++ show n
   print $ loop 0 1 where
     -- loop :: Value -> Value -> Value
-    loop s i = if i == (1000000000 + n) then s else loop (s + (fromJust (gen i))) (i + 1)
+    loop s i = if i == (1000000000 + n) then s else loop (s + fromJust (gen i)) (i + 1)
 
 test1 :: IO ()
 test1 = do
