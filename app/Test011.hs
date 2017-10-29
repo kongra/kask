@@ -1,5 +1,4 @@
-{-# LANGUAGE Safe         #-}
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE Safe #-}
 
 module Test011 where
 
