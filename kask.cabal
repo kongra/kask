@@ -15,12 +15,11 @@ cabal-version:         >= 1.10
 
 library
   ghc-options:         -O2 -W -Wall
-                       -- -Werror
+                       -fllvm -optlo-O3
                        -fwarn-incomplete-uni-patterns
                        -fwarn-incomplete-record-updates
                        -funbox-strict-fields
                        -fwarn-tabs
-                       -fllvm
 
   hs-source-dirs:      src
   exposed-modules:     Kask.Constr
@@ -71,12 +70,11 @@ executable kask-exe
                        Test011
 
   ghc-options:         -O2 -W -Wall
-                       -- -Werror
+                       -fllvm -optlo-O3
                        -fwarn-incomplete-uni-patterns
                        -fwarn-incomplete-record-updates
                        -funbox-strict-fields
                        -fwarn-tabs
-                       -fllvm
                        -threaded -rtsopts -with-rtsopts=-N
 
   build-depends:       base
@@ -95,11 +93,11 @@ test-suite kask-test
                      , kask
 
   ghc-options:         -O0 -W -Wall
+                       -fllvm
                        -fwarn-incomplete-uni-patterns
                        -fwarn-incomplete-record-updates
                        -funbox-strict-fields
                        -fwarn-tabs
-                       -fllvm
                        -threaded -rtsopts -with-rtsopts=-N
 
   default-language:    Haskell2010

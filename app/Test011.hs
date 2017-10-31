@@ -4,30 +4,37 @@ module Test011 where
 
 import Data.Maybe (fromJust)
 
-type Value = Int
+type    Value   = Double
+newtype Wrapper = Wrapper Value deriving Show;
 
-gen :: Value -> Maybe Value
-gen n = Just (n * 3 + 1)
+runWrapper :: Wrapper -> Value
+runWrapper (Wrapper i) = i
 
-experiment :: Value -> IO ()
-experiment n = do
+gen :: Wrapper -> Maybe Wrapper
+gen (Wrapper n) = Just (Wrapper (n * 3 + 1))
+
+f :: Value -> Value
+f = runWrapper . fromJust . gen . Wrapper
+
+experiment :: Wrapper -> IO ()
+experiment (Wrapper n) = do
   print $ "Performing experiment " ++ show n
-  print $ loop 0 1 where
-    loop s i =
+  print $ loop (Wrapper 0) (Wrapper 1) where
+    loop (Wrapper s) (Wrapper i) =
       if i == (1000000000 + n) then
-        s
+        Wrapper s
       else
-        loop (s + fromJust (gen i)) (i + 1)
+        loop (Wrapper (s + f i)) (Wrapper (i + 1))
 
 test1 :: IO ()
 test1 = do
-  experiment 10
-  experiment 11
-  experiment 12
-  experiment 13
-  experiment 14
-  experiment 15
-  experiment 16
-  experiment 17
-  experiment 18
-  experiment 19
+  experiment (Wrapper 10)
+  experiment (Wrapper 11)
+  experiment (Wrapper 12)
+  experiment (Wrapper 13)
+  experiment (Wrapper 14)
+  experiment (Wrapper 15)
+  experiment (Wrapper 16)
+  experiment (Wrapper 17)
+  experiment (Wrapper 18)
+  experiment (Wrapper 19)
