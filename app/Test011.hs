@@ -4,7 +4,7 @@ module Test011 where
 
 import Data.Maybe (fromJust)
 
-type    Value   = Double
+type    Value   = Int
 newtype Wrapper = Wrapper Value deriving Show;
 
 runWrapper :: Wrapper -> Value
