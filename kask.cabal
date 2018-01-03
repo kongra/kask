@@ -58,9 +58,7 @@ executable kask-exe
   main-is:             Main.hs
   other-modules:
                        Test001
-                       Test002
                        Test003
-                       Test004
                        Test005
                        Test006
                        Test007

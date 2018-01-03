@@ -1,10 +1,9 @@
 {-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE MagicHash   #-}
+{-# LANGUAGE   MagicHash #-}
 
 module Test005 where
 
 import Kask.Time
-import GHC.Prim
 import GHC.Exts
 
 fib1 :: Integer -> Integer
