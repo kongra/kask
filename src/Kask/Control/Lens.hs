@@ -1,5 +1,6 @@
-{-# LANGUAGE Safe       #-}
-{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE Safe          #-}
+{-# LANGUAGE RankNTypes    #-}
+{-# LANGUAGE TupleSections #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Control.Lens
@@ -43,9 +44,9 @@ set ln = over ln . const
 -- SAMPLE LENSES
 
 _1 :: Functor f => (a -> f a) -> (a, b) -> f (a, b)
-_1 f (x, y) = fmap (\a -> (a, y)) (f x)
+_1 f (x, y) = fmap (, y) (f x)
 {-# INLINE _1 #-}
 
 _2 :: Functor f => (a -> f b) -> (a, a) -> f (a, b)
-_2 f (x, y) = fmap (\a -> (x, a)) (f y)
+_2 f (x, y) = fmap (x,) (f y)
 {-# INLINE _2 #-}
