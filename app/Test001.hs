@@ -1,7 +1,7 @@
-{-# LANGUAGE Safe #-}
-
 module Test001 where
 
+import RIO
+import Prelude (print)
 import Kask.Time
 
 test1 :: IO ()

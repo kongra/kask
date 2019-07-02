@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Tree.Search
@@ -28,6 +27,9 @@ module Kask.Data.Tree.Search
     , depthFirst
     )
     where
+
+import RIO
+import RIO.List (iterate)
 
 -- | The type of functions that generate children of a given (rose)
 -- tree node.

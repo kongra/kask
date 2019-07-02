@@ -1,6 +1,3 @@
-{-# LANGUAGE              Safe #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE        RankNTypes #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Tree.Print

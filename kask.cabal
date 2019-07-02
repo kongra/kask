@@ -47,17 +47,56 @@ library
                      , deepseq
                      , hashable
                      , mtl
+                     , rio
                      , text
                      , transformers
                      , unordered-containers
 
   default-language:    Haskell2010
+  default-extensions:  AutoDeriveTypeable
+                     , BangPatterns
+                     , BinaryLiterals
+                     , ConstraintKinds
+                     , DataKinds
+                     , DefaultSignatures
+                     , DeriveDataTypeable
+                     , DeriveFoldable
+                     , DeriveFunctor
+                     , DeriveGeneric
+                     , DeriveTraversable
+                     , DoAndIfThenElse
+                     , EmptyDataDecls
+                     , ExistentialQuantification
+                     , FlexibleContexts
+                     , FlexibleInstances
+                     , FunctionalDependencies
+                     , GADTs
+                     , GeneralizedNewtypeDeriving
+                     , InstanceSigs
+                     , KindSignatures
+                     , LambdaCase
+                     , MonadFailDesugaring
+                     , MultiParamTypeClasses
+                     , MultiWayIf
+                     , NamedFieldPuns
+                     , NoImplicitPrelude
+                     , OverloadedStrings
+                     , PartialTypeSignatures
+                     , PatternGuards
+                     , PolyKinds
+                     , RankNTypes
+                     , RecordWildCards
+                     , ScopedTypeVariables
+                     , StandaloneDeriving
+                     , TupleSections
+                     , TypeFamilies
+                     , TypeSynonymInstances
+                     , ViewPatterns
 
 executable kask-exe
   hs-source-dirs:      app
   main-is:             Main.hs
-  other-modules:
-                       Test001
+  other-modules:       Test001
                        Test003
                        Test005
                        Test006
@@ -80,8 +119,50 @@ executable kask-exe
                      , text
                      , bytestring
                      , containers
+                     , rio
                      , unordered-containers
+
   default-language:    Haskell2010
+
+  default-extensions:  AutoDeriveTypeable
+                     , BangPatterns
+                     , BinaryLiterals
+                     , ConstraintKinds
+                     , DataKinds
+                     , DefaultSignatures
+                     , DeriveDataTypeable
+                     , DeriveFoldable
+                     , DeriveFunctor
+                     , DeriveGeneric
+                     , DeriveTraversable
+                     , DoAndIfThenElse
+                     , EmptyDataDecls
+                     , ExistentialQuantification
+                     , FlexibleContexts
+                     , FlexibleInstances
+                     , FunctionalDependencies
+                     , GADTs
+                     , GeneralizedNewtypeDeriving
+                     , InstanceSigs
+                     , KindSignatures
+                     , LambdaCase
+                     , MonadFailDesugaring
+                     , MultiParamTypeClasses
+                     , MultiWayIf
+                     , NamedFieldPuns
+                     , NoImplicitPrelude
+                     , OverloadedStrings
+                     , PartialTypeSignatures
+                     , PatternGuards
+                     , PolyKinds
+                     , RankNTypes
+                     , RecordWildCards
+                     , ScopedTypeVariables
+                     , StandaloneDeriving
+                     , TupleSections
+                     , TypeFamilies
+                     , TypeSynonymInstances
+                     , ViewPatterns
 
 test-suite kask-test
   type:                exitcode-stdio-1.0
@@ -89,6 +170,7 @@ test-suite kask-test
   main-is:             Spec.hs
   build-depends:       base
                      , kask
+                     , rio
 
   ghc-options:         -O0 -W -Wall
                        -fllvm
@@ -99,6 +181,46 @@ test-suite kask-test
                        -threaded -rtsopts -with-rtsopts=-N
 
   default-language:    Haskell2010
+
+  default-extensions:  AutoDeriveTypeable
+                     , BangPatterns
+                     , BinaryLiterals
+                     , ConstraintKinds
+                     , DataKinds
+                     , DefaultSignatures
+                     , DeriveDataTypeable
+                     , DeriveFoldable
+                     , DeriveFunctor
+                     , DeriveGeneric
+                     , DeriveTraversable
+                     , DoAndIfThenElse
+                     , EmptyDataDecls
+                     , ExistentialQuantification
+                     , FlexibleContexts
+                     , FlexibleInstances
+                     , FunctionalDependencies
+                     , GADTs
+                     , GeneralizedNewtypeDeriving
+                     , InstanceSigs
+                     , KindSignatures
+                     , LambdaCase
+                     , MonadFailDesugaring
+                     , MultiParamTypeClasses
+                     , MultiWayIf
+                     , NamedFieldPuns
+                     , NoImplicitPrelude
+                     , OverloadedStrings
+                     , PartialTypeSignatures
+                     , PatternGuards
+                     , PolyKinds
+                     , RankNTypes
+                     , RecordWildCards
+                     , ScopedTypeVariables
+                     , StandaloneDeriving
+                     , TupleSections
+                     , TypeFamilies
+                     , TypeSynonymInstances
+                     , ViewPatterns
 
 source-repository head
   type:     git

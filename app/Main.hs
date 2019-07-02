@@ -1,7 +1,6 @@
-{-# LANGUAGE Safe #-}
-
 module Main (main) where
 
+import RIO
 -- import qualified Test001
 -- import qualified Test002
 -- import qualified Test003

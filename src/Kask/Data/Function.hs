@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Function
@@ -19,7 +18,8 @@ module Kask.Data.Function
     , rcompose'
     ) where
 
-import Data.List (foldl')
+import RIO
+import Data.List (foldl', foldl)
 
 -- | Composes functions passed in a list. Uses foldl.
 -- compose [f1, f2, ..., fn] = f1 . f2 . ... . fn

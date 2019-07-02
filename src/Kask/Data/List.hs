@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.List
@@ -25,6 +24,8 @@ module Kask.Data.List
     , kSublistsR
     )
     where
+
+import RIO
 
 -- | Inserts y before first occurence of x within the list. When y
 -- does not occur in the list, returns the original list. Thanks to:

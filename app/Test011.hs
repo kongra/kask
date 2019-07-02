@@ -1,7 +1,7 @@
-{-# LANGUAGE Safe #-}
-
 module Test011 where
 
+import RIO
+import Prelude (print)
 import Data.Maybe (fromJust)
 
 type    Value   = Int

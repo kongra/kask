@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Time
@@ -27,6 +26,8 @@ module Kask.Time
     )
     where
 
+import RIO hiding (evaluate)
+import Prelude (putStrLn)
 import Control.Exception (evaluate)
 import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs
                     , TimeSpec)

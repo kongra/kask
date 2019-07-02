@@ -1,6 +1,4 @@
-{-# LANGUAGE  Trustworthy #-}
-{-# LANGUAGE    MagicHash #-}
-{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE MagicHash #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Math
@@ -20,6 +18,8 @@ module Kask.Math
     )
     where
 
+import RIO
+import RIO.List (iterate)
 import Data.Word (Word64)
 import GHC.Exts
 

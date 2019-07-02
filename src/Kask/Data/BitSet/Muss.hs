@@ -1,7 +1,3 @@
-{-# LANGUAGE      Trustworthy #-}
-{-# LANGUAGE  ConstraintKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.BitSet.Muss
@@ -26,11 +22,10 @@ module Kask.Data.BitSet.Muss
        )
        where
 
--- import qualified Data.Array.IO as MAIO
+import RIO;
 import qualified Data.Array.MArray as MA
 import           Data.Word (Word64)
 import qualified Kask.Constr as C
--- import qualified Kask.Print as P
 
 type Size = C.Constr (C.BoundsConstr C.Positive) Int
 

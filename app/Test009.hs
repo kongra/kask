@@ -1,7 +1,6 @@
-{-# LANGUAGE      Safe #-}
-
 module Test009 where
 
+import RIO hiding (Chan)
 import qualified Control.Exception as Exception
 import qualified Control.Monad as Monad
 import qualified Data.ByteString as ByteString

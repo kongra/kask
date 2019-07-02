@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Control.Monad
@@ -22,6 +21,7 @@ module Kask.Control.Monad
     )
     where
 
+import RIO hiding (whenM, unlessM)
 import Control.Monad (when, unless)
 import Data.Foldable (toList)
 

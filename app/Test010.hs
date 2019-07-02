@@ -1,6 +1,7 @@
-{-# LANGUAGE Safe #-}
-
 module Test010 where
+
+import RIO
+import Prelude (print)
 
 data FibCount = FibCount !Int !Int deriving Show
 

@@ -1,8 +1,8 @@
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE   MagicHash #-}
-
+{-# LANGUAGE MagicHash #-}
 module Test005 where
 
+import RIO
+import Prelude (print)
 import Kask.Time
 import GHC.Exts
 

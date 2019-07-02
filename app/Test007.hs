@@ -1,7 +1,8 @@
-{-# LANGUAGE Safe #-}
-
 module Test007 where
 
+import RIO
+import RIO.List (iterate)
+import Prelude (ShowS, showString)
 import qualified Data.Text              as T
 import qualified Data.Text.Lazy         as TL
 import qualified Data.Text.Lazy.Builder as TLB

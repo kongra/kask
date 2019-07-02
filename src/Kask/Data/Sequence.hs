@@ -1,4 +1,3 @@
-{-# LANGUAGE Safe #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Data.Sequence
@@ -18,6 +17,7 @@ module Kask.Data.Sequence
     )
     where
 
+import RIO
 import qualified Data.Sequence as Seq
 
 -- | Inserts y before the first occurence of x within the

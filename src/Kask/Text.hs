@@ -1,6 +1,3 @@
-{-# LANGUAGE              Safe #-}
-{-# LANGUAGE     DeriveGeneric #-}
-{-# LANGUAGE FlexibleInstances #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Text
@@ -24,6 +21,7 @@ module Kask.Text
        )
        where
 
+import RIO
 import Control.DeepSeq (NFData  )
 import Data.Hashable   (Hashable)
 import GHC.Generics    (Generic )

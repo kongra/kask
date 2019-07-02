@@ -1,7 +1,3 @@
-{-# LANGUAGE                  Safe #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE     FlexibleInstances #-}
-{-# LANGUAGE     OverloadedStrings #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Print

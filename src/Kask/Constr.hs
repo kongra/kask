@@ -1,7 +1,3 @@
-{-# LANGUAGE                  Safe #-}
-{-# LANGUAGE     FlexibleInstances #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE         DeriveGeneric #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Constr

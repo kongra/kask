@@ -1,6 +1,3 @@
-{-# LANGUAGE              Safe #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Test006 where
 
 import qualified Data.Text as T

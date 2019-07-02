@@ -1,6 +1,3 @@
-{-# LANGUAGE Safe          #-}
-{-# LANGUAGE RankNTypes    #-}
-{-# LANGUAGE TupleSections #-}
 ------------------------------------------------------------------------
 -- |
 -- Module      : Kask.Control.Lens
@@ -24,8 +21,7 @@ module Kask.Control.Lens
     )
     where
 
-import Control.Applicative
-import Data.Functor.Identity
+import RIO hiding (Lens, over, view, set)
 
 type Lens s a = forall f. Functor f => (a -> f a) -> s -> f s
 
