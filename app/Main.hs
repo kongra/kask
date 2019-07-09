@@ -1,6 +1,8 @@
 module Main (main) where
 
 import RIO
+import Criterion.Main
+
 -- import qualified Test001
 -- import qualified Test002
 -- import qualified Test003
@@ -11,10 +13,17 @@ import RIO
 -- import qualified Test008
 -- import qualified Test009
 -- import qualified Test010
-import qualified Test011
+-- import qualified Test011
+import qualified Test012
 
 main :: IO ()
-main = Test011.test1
+main = defaultMain [
+  bgroup "fib" [ bench "75"  $ whnf Test012.tescik20 75
+               , bench "79"  $ whnf Test012.tescik20 79
+               , bench "430" $ whnf Test012.tescik200 430
+               ]]
+
+  -- Test012.test1
   -- Test001.test1
   -- Test002.test1
   -- Test003.test5
