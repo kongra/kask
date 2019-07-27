@@ -18,9 +18,10 @@ import qualified Test012
 
 main :: IO ()
 main = defaultMain [
-  bgroup "fib" [ bench "75"  $ whnf Test012.tescik20 75
-               , bench "79"  $ whnf Test012.tescik20 79
-               , bench "430" $ whnf Test012.tescik200 430
+  bgroup "fib" [ bench "100"    $ whnf Test012.tescik100 100
+               , bench "100000" $ whnf Test012.tescik100 1000
+               --, bench "79"  $ whnf Test012.tescik20 79
+               -- , bench "430" $ whnf Test012.tescik200 430
                ]]
 
   -- Test012.test1
