@@ -24,8 +24,7 @@ module Kask.Data.BitSet.Muss
 
 import RIO;
 import qualified Data.Array.MArray as MA
-import           Data.Word (Word64)
-import qualified Kask.Constr as C
+import qualified Kask.Constr       as  C
 
 type Size = C.Constr (C.BoundsConstr C.Positive) Int
 

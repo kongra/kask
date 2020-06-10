@@ -22,8 +22,6 @@ module Kask.Control.Monad
     where
 
 import RIO hiding (whenM, unlessM)
-import Control.Monad (when, unless)
-import Data.Foldable (toList)
 
 -- | A version of when that works on m Bool rather than raw Bool
 whenM :: Monad m => m Bool -> m () -> m ()

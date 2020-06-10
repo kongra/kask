@@ -19,7 +19,7 @@ module Kask.Data.Function
     ) where
 
 import RIO
-import Data.List (foldl', foldl)
+import Data.List (foldl)
 
 -- | Composes functions passed in a list. Uses foldl.
 -- compose [f1, f2, ..., fn] = f1 . f2 . ... . fn

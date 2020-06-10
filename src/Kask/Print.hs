@@ -35,7 +35,6 @@ module Kask.Print
        where
 
 import qualified Control.Monad.State.Strict as S
-import           Data.Monoid ((<>))
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import qualified Data.Text.Lazy as TL
@@ -44,13 +43,11 @@ import qualified Data.Text.Lazy.IO as TLIO
 import           Prelude hiding (print)
 
 -- ABSTRACTION
-
 class Monad m => Printable m p where
   print   :: p -> m ()
   printLn :: p -> m ()
 
 -- IO
-
 instance Printable IO String where
   print   = putStr
   printLn = putStrLn
@@ -82,7 +79,6 @@ instance Printable IO TLB.Builder where
   {-# INLINE printLn #-}
 
 -- TEXT BUILDER
-
 type TextBuilder = S.State T.Text
 
 toText :: TextBuilder () -> T.Text
@@ -125,7 +121,6 @@ instance Printable TextBuilder TLB.Builder where
   {-# INLINE printLn #-}
 
 -- LAZY TEXT BUILDER
-
 type LazyTextBuilder = S.State TLB.Builder
 
 toLazyTextBuilder :: LazyTextBuilder () -> TLB.Builder
@@ -172,7 +167,6 @@ instance Printable LazyTextBuilder TLB.Builder where
   {-# INLINE printLn #-}
 
 -- STRING BUILDER
-
 type StringBuilder = S.State ShowS
 
 evalShowS :: ShowS -> String
@@ -223,7 +217,6 @@ instance Printable StringBuilder TLB.Builder where
   {-# INLINE printLn #-}
 
 -- CONCATENATION OF TEXTUAL DATA IS PRINTING INTO BUILDERS
-
 class StrCat c where
   strCat :: (Foldable t) => t c -> c
 

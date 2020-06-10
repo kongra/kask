@@ -20,7 +20,6 @@ module Kask.Math
 
 import RIO
 import RIO.List (iterate)
-import Data.Word (Word64)
 import GHC.Exts
 
 nthNaiveFib :: Word64 -> Word64

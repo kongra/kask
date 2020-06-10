@@ -22,10 +22,6 @@ module Kask.Text
        where
 
 import RIO
-import Control.DeepSeq (NFData  )
-import Data.Hashable   (Hashable)
-import GHC.Generics    (Generic )
-
 import qualified Data.Text   as T
 import qualified Kask.Constr as C
 
