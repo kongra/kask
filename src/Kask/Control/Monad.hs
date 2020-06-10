@@ -11,17 +11,17 @@
 -- Some utilites related to Control.Monad
 ------------------------------------------------------------------------
 module Kask.Control.Monad
-    (
-      whenM
-    , unlessM
-    , mapMM
-    , mapMM_
-    , forMM_
-    , toListM
-    )
-    where
+  (
+    whenM
+  , unlessM
+  , mapMM
+  , mapMM_
+  , forMM_
+  , toListM
 
-import RIO hiding (whenM, unlessM)
+  ) where
+
+import           RIO hiding (unlessM, whenM)
 
 -- | A version of when that works on m Bool rather than raw Bool
 whenM :: Monad m => m Bool -> m () -> m ()

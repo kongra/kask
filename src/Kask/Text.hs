@@ -18,12 +18,11 @@ module Kask.Text
        , strip
        , stripNonBlank
        , showText
-       )
-       where
+       ) where
 
-import RIO
 import qualified Data.Text   as T
 import qualified Kask.Constr as C
+import           RIO
 
 class ShowText a where
   showText :: a -> T.Text

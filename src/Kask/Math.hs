@@ -18,9 +18,9 @@ module Kask.Math
     )
     where
 
-import RIO
-import RIO.List (iterate)
-import GHC.Exts
+import           GHC.Exts
+import           RIO
+import           RIO.List (iterate)
 
 nthNaiveFib :: Word64 -> Word64
 nthNaiveFib 0 = 0

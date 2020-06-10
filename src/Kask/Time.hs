@@ -23,15 +23,13 @@ module Kask.Time
     , printMsecs'
     , logging
     , logging'
-    )
-    where
+    ) where
 
-import RIO hiding (evaluate)
-import Prelude (putStrLn)
-import Control.Exception (evaluate)
-import System.Clock (Clock (Monotonic), getTime, diffTimeSpec, toNanoSecs
-                    , TimeSpec)
-
+import           Control.Exception (evaluate)
+import           Prelude           (putStrLn)
+import           RIO               hiding (evaluate)
+import           System.Clock      (Clock (Monotonic), TimeSpec, diffTimeSpec,
+                                    getTime, toNanoSecs)
 defaultClock :: Clock
 defaultClock = Monotonic
 

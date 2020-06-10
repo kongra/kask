@@ -11,16 +11,15 @@
 -- Three-value Kleene logic
 ------------------------------------------------------------------------
 module Kask.Logic.Kleene
-    (
-      Value (..)
-    , not
-    , and
-    , or
-    , impl
-    )
-    where
+  (
+    Value (..)
+  , not
+  , and
+  , or
+  , impl
+  ) where
 
-import Prelude hiding (True, False, not, and, or)
+import           Prelude hiding (False, True, and, not, or)
 
 data Value = True | False | Unknown deriving (Show, Eq);
 

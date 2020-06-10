@@ -11,32 +11,31 @@
 -- Constrained values constructors
 ------------------------------------------------------------------------
 module Kask.Constr
-       (
-         -- * Abstraction
-         Constraint
-       , Constr
-       , satisfies
-       , constr
-       , unconstr
+  (
+    -- * Abstraction
+    Constraint
+  , Constr
+  , satisfies
+  , constr
+  , unconstr
 
-         -- * Non-null (non-empty) constraints
-       , NonNull (..)
-       , IsNull
-       , isNull
+    -- * Non-null (non-empty) constraints
+  , NonNull (..)
+  , IsNull
+  , isNull
 
-         -- * Numeric bounds
-       , Bounds
-       , BoundsConstr (..)
-       , minBound
-       , maxBound
-       , Natural  (..)
-       , Positive (..)
-       )
-       where
+    -- * Numeric bounds
+  , Bounds
+  , BoundsConstr (..)
+  , minBound
+  , maxBound
+  , Natural  (..)
+  , Positive (..)
+  ) where
 
-import Control.DeepSeq (NFData  )
-import Data.Hashable   (Hashable)
-import GHC.Generics    (Generic )
+import           Control.DeepSeq     (NFData)
+import           Data.Hashable       (Hashable)
+import           GHC.Generics        (Generic)
 
 import qualified Data.ByteString
 import qualified Data.HashMap.Strict
@@ -48,7 +47,7 @@ import qualified Data.Sequence
 import qualified Data.Set
 import qualified Data.Text
 
-import Prelude hiding (minBound, maxBound)
+import           Prelude             hiding (maxBound, minBound)
 
 -- ABSTRACTION
 

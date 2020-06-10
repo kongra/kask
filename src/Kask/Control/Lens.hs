@@ -11,17 +11,16 @@
 -- Lightweight lens implementation.
 ------------------------------------------------------------------------
 module Kask.Control.Lens
-    (
-      Lens
-    , over
-    , view
-    , set
-    , _1
-    , _2
-    )
-    where
+  (
+    Lens
+  , over
+  , view
+  , set
+  , _1
+  , _2
+  ) where
 
-import RIO hiding (Lens, over, view, set)
+import           RIO hiding (Lens, over, set, view)
 
 type Lens s a = forall f. Functor f => (a -> f a) -> s -> f s
 

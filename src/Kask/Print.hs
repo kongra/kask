@@ -35,12 +35,12 @@ module Kask.Print
        where
 
 import qualified Control.Monad.State.Strict as S
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
-import qualified Data.Text.Lazy as TL
-import qualified Data.Text.Lazy.Builder as TLB
-import qualified Data.Text.Lazy.IO as TLIO
-import           Prelude hiding (print)
+import qualified Data.Text                  as T
+import qualified Data.Text.IO               as TIO
+import qualified Data.Text.Lazy             as TL
+import qualified Data.Text.Lazy.Builder     as TLB
+import qualified Data.Text.Lazy.IO          as TLIO
+import           Prelude                    hiding (print)
 
 -- ABSTRACTION
 class Monad m => Printable m p where
