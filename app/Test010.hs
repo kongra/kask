@@ -1,7 +1,7 @@
 module Test010 where
 
-import RIO
-import Prelude (print)
+import           Prelude (print)
+import           RIO
 
 data FibCount = FibCount !Int !Int deriving Show
 
