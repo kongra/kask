@@ -1,6 +1,6 @@
 module Main (main) where
 
-import RIO
+import           RIO
 -- import Criterion.Main
 
 -- import qualified Test001
