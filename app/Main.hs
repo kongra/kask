@@ -3,7 +3,7 @@ module Main (main) where
 import           RIO
 -- import Criterion.Main
 
--- import qualified Test001
+import qualified Test001
 -- import qualified Test002
 -- import qualified Test003
 -- import qualified Test004
@@ -12,7 +12,7 @@ import           RIO
 -- import qualified Test007
 -- import qualified Test008
 -- import qualified Test009
-import qualified Test010
+-- import qualified Test010
 -- import qualified Test011
 -- import qualified Test012
 
@@ -26,7 +26,7 @@ main :: IO ()
 
 main =
   -- Test012.test1
-  -- Test001.test1
+  Test001.test1
   -- Test002.test1
   -- Test003.test5
   -- Test004.test1
@@ -37,4 +37,4 @@ main =
   -- Test008.test1
   -- Test008.test2
   -- Test009.test1
-  Test010.test1
+  -- Test010.test1

@@ -1,8 +1,8 @@
 module Test001 where
 
-import RIO
-import Prelude (print)
-import Kask.Time
+import           Kask.Time
+import           Prelude   (print)
+import           RIO
 
 test1 :: IO ()
 test1 = do
