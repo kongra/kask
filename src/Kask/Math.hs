@@ -18,9 +18,9 @@ module Kask.Math
     )
     where
 
-import           GHC.Exts
-import           RIO
-import           RIO.List (iterate)
+import GHC.Exts
+import RIO
+import RIO.List
 
 nthNaiveFib :: Word64 -> Word64
 nthNaiveFib 0 = 0
@@ -43,7 +43,6 @@ nthFib n = loop 0 1 n
 {-# INLINABLE nthFib #-}
 
 -- INFINITE FIB SEQUENCE
-
 data FibGen = FibGen !Integer !Integer
 
 fibgen :: FibGen -> FibGen
@@ -53,5 +52,5 @@ fibfst :: FibGen -> Integer
 fibfst (FibGen a _) = a
 
 fib :: () -> [Integer]
-fib _ = map fibfst $ iterate fibgen $ FibGen 0 1
+fib _ = map fibfst $ RIO.List.iterate fibgen $ FibGen 0 1
 {-# INLINABLE fib #-}

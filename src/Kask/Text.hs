@@ -17,8 +17,7 @@ module Kask.Text
        , ShowText
        , strip
        , stripNonBlank
-       , showText
-       ) where
+       , showText) where
 
 import qualified Data.Text   as T
 import qualified Kask.Constr as C
