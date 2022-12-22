@@ -20,15 +20,15 @@ module Kask.Data.Tree.Print
        )
        where
 
-import           Control.Monad (unless, forM_)
-import           Data.Foldable (toList)
-import qualified Data.Text as T
-import qualified Data.Text.Lazy as TL
+import           Control.Monad          (forM_, unless)
+import           Data.Foldable          (toList)
+import qualified Data.Text              as T
+import qualified Data.Text.Lazy         as TL
 import qualified Data.Text.Lazy.Builder as TLB
-import qualified Kask.Constr as C
-import           Kask.Data.List (markLast)
-import qualified Kask.Print as P
-import           Prelude hiding (Show, show)
+import qualified Kask.Constr            as C
+import           Kask.Data.List         (markLast)
+import qualified Kask.Print             as P
+import           Prelude                hiding (Show, show)
 
 type Adjs a t = Foldable t => a -> t a
 type Show a s = Symbolic s => a -> s
@@ -68,7 +68,7 @@ genIndent (isLast:lastChildMarks) = P.strCat [prefix, suffix]
     indentSymbol True  = emptyIndent
     indentSymbol False = indent
     suffix  = if isLast then forLastChild else forChild
-    prefix  = P.strCat $ fmap indentSymbol $ reverse $ init lastChildMarks
+    prefix  = P.strCat $ fmap indentSymbol $ tail $ reverse lastChildMarks
 
 -- ASCII SYMBOLS
 
