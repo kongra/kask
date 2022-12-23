@@ -77,7 +77,7 @@ library
                      , MultiParamTypeClasses
                      , MultiWayIf
                      , NamedFieldPuns
-                     , NoImplicitPrelude
+                     -- , NoImplicitPrelude
                      , OverloadedStrings
                      , PartialTypeSignatures
                      , PatternGuards
@@ -148,7 +148,7 @@ executable kask-exe
                      , MultiParamTypeClasses
                      , MultiWayIf
                      , NamedFieldPuns
-                     , NoImplicitPrelude
+                     -- , NoImplicitPrelude
                      , OverloadedStrings
                      , PartialTypeSignatures
                      , PatternGuards
@@ -204,7 +204,7 @@ test-suite kask-test
                      , MultiParamTypeClasses
                      , MultiWayIf
                      , NamedFieldPuns
-                     , NoImplicitPrelude
+                     -- , NoImplicitPrelude
                      , OverloadedStrings
                      , PartialTypeSignatures
                      , PatternGuards
