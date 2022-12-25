@@ -1,17 +1,15 @@
 module Main (main) where
 
-collatzTrans :: Int -> Int
+collatzTrans :: Integral a => a -> a
 collatzTrans n = if even n then n `div` 2 else 3 * n + 1
 
-collatzLen :: Int -> Int
-collatzLen = loop 1 where
-  loop result m =
-    if m == 1 then
-      result
-    else
-      loop (result+1) (collatzTrans m)
+collatzSeq :: Integral a => a -> [a]
+collatzSeq = takeWhile (/= 1) . iterate collatzTrans
 
-euler14 :: Int -> (Int, Int)
+collatzLen :: Integral a => a -> Int
+collatzLen = length . collatzSeq
+
+euler14 :: Integral a => a -> (a, Int)
 euler14 n = loop 0 0 1 where
   loop maxLen j i =
     if i == n then
@@ -23,18 +21,20 @@ euler14 n = loop 0 0 1 where
         else
           loop maxLen j (i+1)
 
+type Euler14Result = (Int, Int)
+
 main :: IO ()
 main = do
-  print $ euler14 (1000000 + 0)
-  print $ euler14 (1000000 + 1)
-  print $ euler14 (1000000 + 2)
-  print $ euler14 (1000000 + 3)
-  print $ euler14 (1000000 + 4)
-  print $ euler14 (1000000 + 5)
-  print $ euler14 (1000000 + 6)
-  print $ euler14 (1000000 + 7)
-  print $ euler14 (1000000 + 8)
-  print $ euler14 (1000000 + 9)
+  print (euler14 (1000000 + 0) :: Euler14Result)
+  print (euler14 (1000000 + 1) :: Euler14Result)
+  print (euler14 (1000000 + 2) :: Euler14Result)
+  print (euler14 (1000000 + 3) :: Euler14Result)
+  print (euler14 (1000000 + 4) :: Euler14Result)
+  print (euler14 (1000000 + 5) :: Euler14Result)
+  print (euler14 (1000000 + 6) :: Euler14Result)
+  print (euler14 (1000000 + 7) :: Euler14Result)
+  print (euler14 (1000000 + 8) :: Euler14Result)
+  print (euler14 (1000000 + 9) :: Euler14Result)
 
 -- import Criterion.Main
 -- import qualified Test002
