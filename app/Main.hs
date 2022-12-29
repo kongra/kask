@@ -1,12 +1,20 @@
 module Main (main) where
 
-collatzTrans :: Integral a => a -> a
-collatzTrans n = if even n then n `div` 2 else 3 * n + 1
+import           Prelude (iterate, print)
+import           RIO
 
-collatzSeq :: Integral a => a -> [a]
-collatzSeq = takeWhile (/= 1) . iterate collatzTrans
+newtype Collatz a = Collatz a
 
-collatzLen :: Integral a => a -> Int
+collatzTrans :: Integral a => Collatz a -> Collatz a
+collatzTrans (Collatz n) = Collatz $ if even n then n `div` 2 else 3 * n + 1
+
+notOne :: Integral a => Collatz a -> Bool
+notOne (Collatz n) = n /= 1
+
+collatzSeq :: Integral a => Collatz a -> [Collatz a]
+collatzSeq = takeWhile notOne . iterate collatzTrans
+
+collatzLen :: Integral a => Collatz a -> Int
 collatzLen = length . collatzSeq
 
 euler14 :: Integral a => a -> (a, Int)
@@ -15,13 +23,26 @@ euler14 n = loop 0 0 1 where
     if i == n then
       (j, maxLen)
     else
-      let len = collatzLen i in
+      let len = collatzLen (Collatz i) in
         if len > maxLen then
           loop len i (i+1)
         else
           loop maxLen j (i+1)
 
 type Euler14Result = (Int, Int)
+
+data DayOfWeek =
+  Mon | Tue | Weds | Thu | Fri | Sat | Sun
+
+instance Eq DayOfWeek where
+  (==) Mon  Mon  = True
+  (==) Tue  Tue  = True
+  (==) Weds Weds = True
+  (==) Thu  Thu  = True
+  (==) Fri  Fri  = True
+  (==) Sat  Sat  = True
+  (==) Sun  Sun  = True
+  (==) _   _     = False
 
 main :: IO ()
 main = do
