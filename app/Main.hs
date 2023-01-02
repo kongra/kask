@@ -1,6 +1,7 @@
 module Main (main) where
 
-import           Prelude (iterate, print)
+import           Data.Monoid
+import           Prelude     (iterate, print)
 import           RIO
 
 newtype Collatz a = Collatz a
@@ -43,6 +44,22 @@ instance Eq DayOfWeek where
   (==) Sat  Sat  = True
   (==) Sun  Sun  = True
   (==) _   _     = False
+
+data Optional a = Nada
+                | Only a
+                deriving (Eq, Show)
+
+instance Semigroup a => Semigroup (Optional a) where
+  (<>) = optOp
+
+instance Monoid a => Monoid (Optional a) where
+  mempty = Nada
+
+optOp :: Semigroup a => Optional a -> Optional a -> Optional a
+optOp  Nada     Nada     = Nada
+optOp  Nada    (Only a') = Only a'
+optOp (Only a)  Nada     = Only a
+optOp (Only a) (Only a') = Only (a <> a')
 
 main :: IO ()
 main = do
