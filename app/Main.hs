@@ -1,7 +1,8 @@
 module Main (main) where
 
+import           Control.Monad (join)
 import           Data.Monoid
-import           Prelude     (iterate, print)
+import           Prelude       (fmap, iterate, print, pure)
 import           RIO
 
 newtype Collatz a = Collatz a
@@ -60,6 +61,30 @@ optOp  Nada     Nada     = Nada
 optOp  Nada    (Only a') = Only a'
 optOp (Only a)  Nada     = Only a
 optOp (Only a) (Only a') = Only (a <> a')
+
+newtype Email     = Email     String deriving (Show)
+newtype FirstName = FirstName String deriving (Show)
+
+data Profile = Profile Email FirstName deriving (Show)
+
+makeEmail :: String -> Maybe Email
+makeEmail = Just . Email
+
+makeFirstName :: String -> Maybe FirstName
+makeFirstName = Just . FirstName
+
+makeProfile :: String -> String -> Maybe Profile
+makeProfile email firstName =
+  Profile <$> makeEmail email <*> makeFirstName firstName
+
+mkProfile :: String -> String -> Maybe Profile
+mkProfile email firstName = do
+  email'     <- makeEmail     email
+  firstName' <- makeFirstName firstName
+  return (Profile email' firstName')
+
+bind :: Monad m => (a -> m b) -> m a -> m b
+bind f m = join $ fmap f m
 
 main :: IO ()
 main = do
