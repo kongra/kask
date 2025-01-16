@@ -1,0 +1,17 @@
+cabal: Entering directory '.'
+Configuring kask-base-0.1.0.0...
+Building kask-base-0.1.0.0...
+Preprocessing library kask-base-0.1.0.0...
+[1 of 7] Compiling Kask.Data.Tree.Search ( Kask/Data/Tree/Search.hs, dist/dist-sandbox-c09db822/build/Kask/Data/Tree/Search.o )
+[2 of 7] Compiling Kask.Data.Sequence ( Kask/Data/Sequence.hs, dist/dist-sandbox-c09db822/build/Kask/Data/Sequence.o )
+[3 of 7] Compiling Kask.Data.List   ( Kask/Data/List.hs, dist/dist-sandbox-c09db822/build/Kask/Data/List.o )
+[4 of 7] Compiling Kask.Data.Function ( Kask/Data/Function.hs, dist/dist-sandbox-c09db822/build/Kask/Data/Function.o )
+[5 of 7] Compiling Kask.Data.Tree.Print ( Kask/Data/Tree/Print.hs, dist/dist-sandbox-c09db822/build/Kask/Data/Tree/Print.o )
+[6 of 7] Compiling Kask.Control.Monad ( Kask/Control/Monad.hs, dist/dist-sandbox-c09db822/build/Kask/Control/Monad.o )
+[7 of 7] Compiling Kask.Control.Lens ( Kask/Control/Lens.hs, dist/dist-sandbox-c09db822/build/Kask/Control/Lens.o )
+Creating package registration file:
+/home/kongra/tmp/pkgConf-kask-base-0.1.010252023621350490027.0
+Installing library in
+/home/kongra/Devel/Projects/Present/Haskell/01-kask-base/.cabal-sandbox/lib/x86_64-linux-ghc-8.0.1.20160725/kask-base-0.1.0.0-1nIMjO9zSxDCrSbl8Jltx
+Registering kask-base-0.1.0.0...
+cabal: Leaving directory '.'
